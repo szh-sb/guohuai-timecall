@@ -1,18 +1,22 @@
 # 国槐计划｜时空来电 3.5
 
-面向初中课堂的历史人物 AI 互动实验室。学生通过“是 / 不是 / 不确定”提问猜身份；猜对或点击“一键揭晓”后，与同一历史人物进行模拟通话。
+初中课堂专用历史人物互动网站。十位人物的隐藏身份猜谜、常见问答即时判断、猜不出来时直接揭晓，并继续与同一人物对话。
 
-## 功能
-- 十位历史人物的身份猜谜、教学资料与揭晓
-- 常见问题即时判断，复杂提问可接入 DeepSeek 的 `/api/guess`
-- 文字交流、可选语音朗读、口型模拟、人物动作与教师演示
-- GitHub Pages 提供静态页面；Cloudflare Worker 转发 DeepSeek 请求
+## 当前发布状态（按文件核对）
+- ✅ 已提交 `index.html`、`config.js` 与 GitHub Pages Actions 工作流。
+- ⚠️ 原始李白/苏轼真人风格 WEBP 图像（`assets/` 下 8 张）尚未上传到 GitHub；网页提供内置古风 SVG 占位形象以避免破图。
+- ⚠️ Cloudflare `worker.js` 尚未部署，网页中 AI 设置暂不能连接真正的 DeepSeek；离线问答、揭晓、人物介绍可以使用。
+- 🔒 未在本仓库中保存任何真实 DeepSeek API Key。
 
-## 打开网站
-在仓库 Settings → Pages 中，将发布来源设为 **Deploy from a branch**，选择 `main`、`/(root)` 并保存。
-地址通常为 https://szh-sb.github.io/guohuai-timecall/ 。
+## 发布为网址
+GitHub 仓库 → **Settings → Pages → Build and deployment → Source: GitHub Actions**，保存后查看 **Actions → Publish Timecall to GitHub Pages** 的部署结果。
 
-## 云端 AI
-GitHub Pages 不运行后端。将 `worker.js` 部署到 Cloudflare Workers，设置 `ALLOWED_ORIGIN=https://szh-sb.github.io`，课堂中由教师在网页设置界面临时填写自己的 API Key 与 Worker URL。**不要将任何密钥上传到本仓库。**
+预计网址（仅启用 Pages 并部署成功后有效）：https://szh-sb.github.io/guohuai-timecall/
 
-> 本项目的历史人物外观、语言和声音均为教学情景模拟，不能当作真实史料。未接入云端时也可以体验离线猜谜与预设对话。
+## 补齐原创人物素材
+下载聊天中的 **时空来电 3.5 ZIP**，解压后打开 `assets/`，将 8 张 WEBP 图片上传到仓库同名 `assets/` 目录。这会自动替换内置占位形象。
+
+## 启用真实 AI
+GitHub Pages 不能安全地存放或调用 DeepSeek API。将 3.5 ZIP 内的 `worker.js` **单独部署**至 Cloudflare Workers，设置 `ALLOWED_ORIGIN=https://szh-sb.github.io`，为教师访问设置 `CLASSROOM_PIN` 并配置访问限制；然后由教师在网页临时填写 Worker URL 与 DeepSeek 密钥。不要把密钥上传至 GitHub。
+
+网页口型和人物动作属于教学模拟，人物肖像、原声和对话都不是历史复原证据。
