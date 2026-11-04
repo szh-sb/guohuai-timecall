@@ -1,22 +1,24 @@
-# 国槐计划｜时空来电 3.5
+# 国槐计划｜时空来电 3.6（浏览器直连实验版）
 
-初中课堂专用历史人物互动网站。十位人物的隐藏身份猜谜、常见问答即时判断、猜不出来时直接揭晓，并继续与同一人物对话。
+面向初中课堂的历史人物互动网页。提供 10 位历史人物的固定身份猜谜、常见问题即时判断、一键揭晓、古人角色对话、语音播报、口型与动作模拟。
 
-## 当前发布状态（按文件核对）
-- ✅ 已提交 `index.html`、`config.js` 与 GitHub Pages Actions 工作流。
-- ⚠️ 原始李白/苏轼真人风格 WEBP 图像（`assets/` 下 8 张）尚未上传到 GitHub；网页提供内置古风 SVG 占位形象以避免破图。
-- ⚠️ Cloudflare `worker.js` 尚未部署，网页中 AI 设置暂不能连接真正的 DeepSeek；离线问答、揭晓、人物介绍可以使用。
-- 🔒 未在本仓库中保存任何真实 DeepSeek API Key。
+## 直接使用
 
-## 发布为网址
-GitHub 仓库 → **Settings → Pages → Build and deployment → Source: GitHub Actions**，保存后查看 **Actions → Publish Timecall to GitHub Pages** 的部署结果。
+1. 打开网页（启用 GitHub Pages 后）：https://szh-sb.github.io/guohuai-timecall/
+2. 点击右上角“🔑 填写 DeepSeek 密钥”。
+3. 粘贴教师自己的 API Key，选择“保存并测试直连”。
+4. 若测试通过，即可用 AI 处理复杂猜谜问题和人物自由对话；不联网或连接失败时仍可离线体验基础功能。
 
-预计网址（仅启用 Pages 并部署成功后有效）：https://szh-sb.github.io/guohuai-timecall/
+**此版本不要求 Cloudflare Worker，不要求 Python。** 页面直接向 `https://api.deepseek.com/chat/completions` 发送请求。
 
-## 补齐原创人物素材
-下载聊天中的 **时空来电 3.5 ZIP**，解压后打开 `assets/`，将 8 张 WEBP 图片上传到仓库同名 `assets/` 目录。这会自动替换内置占位形象。
+## 必须了解的限制
 
-## 启用真实 AI
-GitHub Pages 不能安全地存放或调用 DeepSeek API。将 3.5 ZIP 内的 `worker.js` **单独部署**至 Cloudflare Workers，设置 `ALLOWED_ORIGIN=https://szh-sb.github.io`，为教师访问设置 `CLASSROOM_PIN` 并配置访问限制；然后由教师在网页临时填写 Worker URL 与 DeepSeek 密钥。不要把密钥上传至 GitHub。
+- **浏览器可能因 DeepSeek 服务端的 CORS 跨域策略拦截直连。** 即使密钥有效，也不能保证成功；前端无法绕过服务端的跨域限制。此时需要安全的代理服务，或使用离线课堂模式。
+- **直连 API Key 有暴露风险。** 浏览器开发者工具、共享设备、恶意浏览器扩展可能读取密钥。不要在学生投屏时展示密钥，也不要把密钥写入源码或 GitHub 仓库。
+- 密钥在当前网页内存中临时使用，刷新后清除；项目代码内不含 API Key。
+- 口型属于近似动画，而非精确音素同步；历史人物肖像、声音和台词均为教学演绎。
+- GitHub Pages 是否已经启用，需要到仓库 Settings → Pages 核实，本次代码提交并不代表 Pages 已自动公开。
 
-网页口型和人物动作属于教学模拟，人物肖像、原声和对话都不是历史复原证据。
+## 后续如需稳定可靠
+
+请使用 Cloudflare Worker 或其他可信后端安全调用 DeepSeek API，并限制额度、并发和访问来源。
