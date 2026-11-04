@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#081e34" />
+<title>时空来电 3.5｜AI 快速猜谜 · 一键揭晓通话</title>
+<style>
+:root{--bg:#06172b;--panel:#0d2944;--p2:#133754;--edge:rgba(192,232,255,.15);--muted:#a5bdd0;--light:#effaff;--cyan:#56d8e8;--green:#2fc78c;--yellow:#ffc876;--red:#ff7485;--ink:#06233b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--light);font-family:Inter,"Microsoft YaHei","PingFang SC",sans-serif;background:radial-gradient(ellipse at 20% -15%,#124a6b 0,transparent 48%),radial-gradient(ellipse at 100% 100%,#132e67,transparent 55%),#06172b;min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer;border:0}button:disabled{opacity:.5;cursor:not-allowed}.shell{max-width:1370px;padding:27px 28px 40px;margin:auto}.header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}.brand{display:flex;align-items:center;gap:12px}.brandmark{display:grid;place-items:center;background:linear-gradient(145deg,#64f8e6,#267cb4);border-radius:15px;color:#06213c;font-size:28px;width:50px;height:50px;box-shadow:0 12px 28px #0005}.eyebrow{color:#6ce0e5;text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:800}.brand h1{margin:4px 0 0;font-size:22px;letter-spacing:.05em}.rightHead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}.pill{border:1px solid var(--edge);padding:8px 12px;border-radius:100px;font-size:12px;color:#c0e3f0;background:#ffffff08}.mini{border-radius:10px;padding:9px 13px;background:#ffffff13;color:#e9f5ff;border:1px solid var(--edge);font-size:13px}.mini:hover{background:#ffffff26}.hero{padding:34px 37px 31px;border-radius:27px;border:1px solid var(--edge);background:linear-gradient(110deg,#153b5b 0%,#0a2743 60%,#07334a 100%);display:flex;justify-content:space-between;gap:24px;align-items:center;overflow:hidden;position:relative;box-shadow:0 20px 60px #0003}.hero:after{content:"";position:absolute;width:320px;height:320px;right:-80px;top:-170px;background:radial-gradient(circle,#58e8e63d,transparent 66%);pointer-events:none}.hero h2{font-size:clamp(25px,3vw,41px);line-height:1.3;margin:10px 0 10px}.hero p{max-width:680px;color:#bfd7e6;line-height:1.75;margin:0;font-size:15px}.heroGlyph{font-size:82px;filter:drop-shadow(0 8px 15px #6ee5e433);opacity:.85;line-height:1}.steps{display:flex;gap:10px;margin:20px 0}.step{font-size:13px;color:#a1c1d2;background:#ffffff0c;border:1px solid #ffffff13;padding:9px 14px;border-radius:999px}.step.active{color:#072c41;background:#a0f0e9;font-weight:800}.step.complete{color:#b7efdc;border-color:#3fd79a65}.layout{display:grid;grid-template-columns:minmax(300px,.88fr) minmax(0,1.12fr);gap:20px;align-items:stretch}.panel{background:linear-gradient(180deg,#0f2c46e8,#0b223bea);border:1px solid var(--edge);border-radius:23px;overflow:hidden;box-shadow:0 15px 38px #0003}.panelHead{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 0;gap:8px}.panelHead h3{font-size:17px;margin:0}.tiny{color:#9fbcd0;font-size:12px}.mysteryStage{padding:8px 28px 20px;min-height:355px;display:flex;flex-direction:column;align-items:center;justify-content:center}.seal{width:min(255px,70%);aspect-ratio:1;position:relative;display:grid;place-items:center;margin:3px auto 20px;border-radius:50%;border:1px solid #8fdef741;background:radial-gradient(circle,#3ac6d72d 0%,#24476e55 42%,#061d34 71%);box-shadow:inset 0 0 52px #138fbd35,0 0 60px #1a94a321}.seal:before,.seal:after{content:"";position:absolute;inset:11px;border:1px dashed #8bdbe764;border-radius:50%}.seal:after{inset:-11px;border-style:solid;border-color:#9fd2f825}.unknown{font-family:serif;font-size:125px;color:#d5f6ef;text-shadow:0 10px 22px #0008}.mysteryStage h3{font-size:22px;margin:2px 0 7px}.mysteryStage p{text-align:center;color:#9bbbd0;line-height:1.6;margin:0;font-size:14px}.progress{display:flex;gap:7px;align-items:center;padding:0 24px 22px}.progress i{height:5px;flex:1;background:#24516b;border-radius:9px}.progress i.done{background:#43cebb}.entry{padding:21px 23px 22px}.inputline{display:flex;gap:9px}.inputline input{min-width:0;flex:1;background:#071f37;border:1px solid #36708a;color:#fff;border-radius:12px;padding:13px 15px;outline:none}.inputline input:focus{border-color:#5de9d8;box-shadow:0 0 0 3px #3acabd22}.primary{background:linear-gradient(120deg,#87e9d7,#4ccfd6);color:#083448;font-weight:800;border-radius:12px;padding:12px 17px}.primary:hover{filter:brightness(1.07)}.ghost{background:#ffffff13;color:white;border:1px solid #ffffff2e;padding:11px 14px;border-radius:12px}.tip{color:#8fb2c6;font-size:12px;line-height:1.7;margin:10px 0 0}.chips{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0 0}.chip{background:#20445d;border:1px solid #35647d;border-radius:30px;color:#def8fb;padding:8px 12px;font-size:12px}.chip:hover{background:#30627d}.log{max-height:460px;min-height:295px;overflow:auto;padding:20px 23px 16px;scrollbar-color:#46768c transparent}.logEmpty{color:#a6bfce;text-align:center;padding:76px 20px;line-height:1.8}.turn{display:flex;flex-direction:column;gap:7px;margin-bottom:19px}.turn .q{font-size:14px;align-self:flex-end;max-width:90%;background:#2c576b;padding:11px 15px;border-radius:13px 13px 3px 13px;line-height:1.5}.turn .a{font-weight:800;font-size:16px;align-self:flex-start;border:1px solid #2a6c7f;padding:8px 18px;background:#10404e;border-radius:13px 13px 13px 3px;color:#b9fcde}.turn .a.bad{border-color:#805a6b;background:#422a41;color:#ffb8bb}.turn .a.uncertain{border-color:#806d44;background:#3f3828;color:#ffe3a7}.smallFooter{display:flex;justify-content:space-between;padding:0 23px 20px;color:#86a7be;font-size:12px}.reveal{display:none;margin-top:20px;padding:18px;background:linear-gradient(135deg,#1e4c59,#1a3957);border-radius:15px;border:1px solid #57daca5e}.reveal.show{display:block}.reveal h4{margin:0 0 7px;font-size:22px}.reveal p{line-height:1.7;color:#e2f3f7;margin:6px 0 9px;font-size:14px}.reveal ol{padding-left:22px;font-size:13px;color:#daf0f6;line-height:1.8}.join{width:100%;font-size:16px;margin-top:9px;padding:15px}.callWrap{display:none;position:fixed;inset:0;z-index:50;background:#030f1bcc;backdrop-filter:blur(13px);padding:18px;align-items:center;justify-content:center}.callWrap.show{display:flex}.call{width:min(1330px,100%);height:min(830px,calc(100vh - 36px));min-height:580px;display:grid;grid-template-columns:minmax(350px,1.15fr) minmax(310px,.85fr);border:1px solid #46849b68;border-radius:26px;overflow:hidden;background:#0a2137;box-shadow:0 45px 100px #000a}.video{background:radial-gradient(ellipse at 50% 30%,#296582 0,#103a5c 37%,#04162b 77%);position:relative;display:flex;align-items:center;flex-direction:column;min-width:0}.video:before{position:absolute;content:"";inset:18px;border:1px solid #ffffff18;border-radius:22px;pointer-events:none}.vTop{width:100%;padding:26px 31px;display:flex;justify-content:space-between;z-index:1;align-items:start}.live{background:#0e553f;color:#a3ffcc;border:1px solid #54efaa55;padding:7px 11px;border-radius:40px;font-size:11px;font-weight:800}.callName{font-size:27px;font-weight:850;margin:4px 0}.duration{color:#c1d8e7;font-size:12px;letter-spacing:.06em}.figure{width:min(410px,70%);min-height:240px;max-height:410px;display:flex;align-items:center;justify-content:center;flex:1;position:relative}.figure:after{content:"";position:absolute;bottom:0;width:77%;height:22px;background:#0005;filter:blur(20px);border-radius:50%}.portrait{width:100%;max-height:100%;filter:drop-shadow(0 20px 25px #020e24ad)}.figure.speaking .mouth{transform-origin:center;animation:talk .24s linear infinite alternate}.figure.speaking .haloRing{animation:pulse 1.2s ease-in-out infinite alternate}@keyframes talk{to{transform:scaleY(1.75)}}@keyframes pulse{to{opacity:.8;transform:scale(1.03)}}.roleline{font-size:13px;color:#b0d1df;z-index:1;line-height:1.6;margin:0 10px 12px;text-align:center}.wave{height:27px;display:flex;align-items:center;justify-content:center;gap:4px;margin:1px 0 12px}.wave i{height:7px;width:4px;background:#55e5dd;border-radius:8px;opacity:.3}.wave.active i{animation:bars .7s ease-in-out infinite alternate;opacity:1}.wave i:nth-child(2n){animation-delay:.2s}.wave i:nth-child(3n){animation-delay:.3s}@keyframes bars{to{height:24px}}.controls{z-index:1;display:flex;align-items:center;justify-content:center;gap:18px;padding:14px 12px 34px}.callbtn{height:56px;width:56px;border-radius:50%;display:grid;place-items:center;background:#ffffff24;border:1px solid #ffffff36;color:#e3faff;font-size:23px}.callbtn.off{background:#aa4c4c77}.callbtn.end{width:65px;height:65px;background:#f04559;font-size:27px;box-shadow:0 10px 29px #e62e4660}.callbtn:hover{filter:brightness(1.2)}.ctrlcol{display:flex;flex-direction:column;align-items:center;gap:7px;color:#b7d4e3;font-size:11px;min-width:64px}.chat{display:flex;flex-direction:column;min-height:0;background:#eaf1f5;color:#25384b}.chatTop{padding:20px 22px 14px;background:#fff;border-bottom:1px solid #d2dee7;display:flex;justify-content:space-between;align-items:center}.chatTop strong{font-size:16px}.mode{font-size:11px;padding:5px 8px;background:#d9f5ec;color:#087a59;border-radius:99px;font-weight:800}.mode.offline{background:#fff1ce;color:#886018}.messages{padding:23px 21px;overflow:auto;flex:1}.bubRow{display:flex;gap:9px;margin:0 0 16px;align-items:flex-end}.bubRow.me{justify-content:flex-end}.tinyAvatar{flex:0 0 30px;height:30px;background:#325779;border-radius:50%;display:grid;place-items:center;font-size:16px}.bubble{max-width:83%;border-radius:16px 16px 16px 4px;background:white;padding:11px 14px;font-size:13px;line-height:1.75;color:#344a5b;box-shadow:0 2px 8px #112b3920;white-space:pre-wrap;overflow-wrap:anywhere}.me .bubble{background:#b8efd3;border-radius:16px 16px 4px 16px}.thinking{opacity:.6}.promptRow{padding:10px 15px 8px;display:flex;gap:7px;overflow:auto}.promptRow button{white-space:nowrap;color:#1d5970;background:#fff;border:1px solid #c8dee5;border-radius:50px;font-size:11px;padding:8px 10px}.compose{background:white;padding:11px 14px 15px;display:flex;gap:9px;border-top:1px solid #d9e6ee}.compose input{flex:1;min-width:0;padding:12px 11px;border:1px solid #c2d5df;border-radius:11px;outline:none;color:#273b4b;background:#fafdfd}.compose button{background:#156b77;color:white;border-radius:11px;padding:10px 16px;font-weight:800}.notice{margin:0;padding:7px 17px 12px;background:white;color:#7c91a0;font-size:10px;line-height:1.5}.toast{position:fixed;z-index:99;bottom:25px;left:50%;transform:translateX(-50%);max-width:90vw;color:white;padding:13px 18px;border-radius:14px;background:#17394dcc;border:1px solid #6fcdbb;font-size:13px;box-shadow:0 16px 40px #0008;display:none}.toast.show{display:block}.rules{margin-top:19px;padding:16px 21px;font-size:13px;line-height:1.75;color:#9fbfd1;background:#ffffff07;border:1px dashed #ffffff2b;border-radius:15px}.rules strong{color:#e0f9ef}#teacherModal{display:none;position:fixed;inset:0;z-index:60;background:#000b;place-items:center;padding:20px}#teacherModal.show{display:grid}.modal{width:min(520px,100%);background:#123650;padding:28px;border-radius:20px;border:1px solid #6ccfcf5a;box-shadow:0 30px 60px #0009}.modal h3{margin-top:0}.modal p{font-size:13px;line-height:1.8;color:#c4dae5}.personGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:18px 0}.personGrid button{background:#1f4e65;border-radius:10px;padding:11px 2px;color:white}.personGrid button:hover{background:#30778b}.helpBtns{display:flex;justify-content:flex-end;gap:8px}@media(max-width:950px){.layout{grid-template-columns:1fr}.call{grid-template-columns:1fr;height:calc(100vh - 20px)}.callWrap{padding:10px}.video{min-height:395px}.figure{max-height:210px;min-height:120px}.controls{padding-bottom:15px}.vTop{padding:15px 20px}.chat{min-height:340px}.messages{min-height:160px}.heroGlyph{display:none}}@media(max-width:620px){.shell{padding:12px 12px 25px}.header{align-items:start}.brand h1{font-size:17px}.brandmark{height:42px;width:42px}.hero{padding:26px 23px}.hero h2{font-size:27px}.hero p{font-size:13px}.steps{gap:4px}.step{font-size:11px;padding:7px}.panelHead{padding:19px 17px 0}.entry{padding:16px}.log{min-height:240px}.mysteryStage{min-height:300px}.callName{font-size:21px}.call{min-height:0}.video{min-height:370px}.ctrlcol{min-width:52px}.personGrid{grid-template-columns:repeat(3,1fr)}}
+#authModal{display:none;position:fixed;inset:0;z-index:80;background:#000c;place-items:center;padding:20px}#authModal.show{display:grid}.pinrow{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.pinrow input{min-width:220px;flex:1;background:#071d33;border:1px solid #4e8496;padding:12px 13px;border-radius:11px;color:#effcff}.pinrow input:focus{outline:2px solid #82e6dd}.pinrow button{white-space:nowrap}.mininote{font-size:11px;opacity:.8}
+
+/* ----------  TIME CALL 2.0 / HISTORICAL ATELIER ---------- */
+:root{--bg:#071a27;--panel:#102c39;--p2:#173c48;--edge:rgba(218,180,112,.24);--muted:#b7c4bf;--light:#f6efe0;--cyan:#b2dadd;--green:#a2d6bc;--yellow:#e8c992;--red:#ed725d;--ink:#112630}
+body{background:radial-gradient(ellipse at 82% 1%,rgba(81,146,153,.24),transparent 36%),radial-gradient(ellipse at 10% 87%,rgba(175,129,80,.15),transparent 38%),#071a27;color:var(--light)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.18;background-image:radial-gradient(#d2b88e 0.6px,transparent 0.6px);background-size:25px 25px;mask-image:linear-gradient(to bottom,#000,transparent 95%)}
+.shell{position:relative;z-index:1;max-width:1480px;padding:24px 30px 50px}
+.brandmark{background:linear-gradient(145deg,#eacf9b,#a67a43);color:#173340;box-shadow:0 8px 26px #050f17aa;border-radius:15px;font-family:serif}
+.brand h1{font-size:21px;font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;color:#e9d2ab}
+.eyebrow{color:#e2bf8f;font-weight:650;letter-spacing:.17em}
+.mini{background:#ffffff08;border-color:#b8946140;color:#f0e2ca}.mini:hover{background:#e5c58f22}
+.pill{background:#d6ac6e18;border-color:#d6ac6e42;color:#f0d6ae}
+.hero{position:relative;min-height:296px;padding:32px 40px;border-color:#e1bd7a55;border-radius:22px;background:linear-gradient(103deg,#173844f0 0%,#0c2733ef 57%,#142d39 100%);box-shadow:0 22px 75px #010d19bb;isolation:isolate}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 78% 30%,#b39b583d,transparent 35%),repeating-linear-gradient(135deg,transparent 0 27px,#c2d5c408 27px 28px);opacity:.6;z-index:-1}
+.hero:after{width:490px;height:490px;right:-150px;top:-150px;background:radial-gradient(circle,#d6b37834,transparent 66%)}
+.hero h2{font-family:"STKaiti","KaiTi","Songti SC",serif;line-height:1.38;font-weight:750;font-size:clamp(30px,3.6vw,49px);letter-spacing:.035em;color:#f7e3b5}
+.hero p{max-width:650px;color:#d6d7d0;font-size:14px}
+.hero h2 span{color:#e7bf77!important;text-shadow:0 4px 24px #f2bf6d24}
+.heroGlyph{display:none}
+.heroPortrait{height:285px;min-width:265px;width:280px;position:absolute;right:65px;bottom:-12px;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;filter:drop-shadow(0 16px 22px #061620c9)}
+.heroPortrait:before{position:absolute;content:"";height:220px;width:220px;border-radius:50%;background:radial-gradient(circle,#c9ab7166,transparent 67%);top:10px}
+.heroPortrait svg{position:relative;width:280px;height:318px;object-fit:contain}
+.heroNote{margin-top:14px;display:inline-flex;gap:8px;align-items:center;border:1px solid #deba7750;border-radius:80px;padding:7px 12px;background:#ebc88916;color:#f6d6a4;font-size:12px}
+.steps{gap:8px;margin:18px 0}.step{border:1px solid #ddbb8240;color:#cccfca;background:#ffffff08}.step.active{background:linear-gradient(135deg,#f0d7a2,#c99452);color:#243340}.step.complete{border-color:#ddbb82;color:#f0d4a3}
+.panel{border-radius:20px;border-color:#d4a86b48;background:linear-gradient(168deg,#163544f5,#0d2533f5);box-shadow:0 15px 45px #0005}
+.panelHead{padding-top:23px}.panelHead h3{color:#edd0a0;font-family:"Songti SC",serif;font-size:19px}
+.seal{width:min(235px,70%);background:radial-gradient(circle,#5d7d7d44,#162a38 68%,#071923 90%);border-color:#d5ae6d78;box-shadow:0 0 40px #b08a4b22,inset 0 0 50px #d8b97816}
+.seal:before,.seal:after{border-color:#ddb8796f}
+.unknown{color:#eccd94;text-shadow:0 3px 28px #ffd89c55}
+.mysteryStage h3{font-family:"Songti SC",serif;color:#e5d4b9}
+.progress i{background:#23414b}.progress i.done{background:#e9c584}
+.entry{border-top:1px solid #dcb97724;background:#0a212d44}.inputline input{background:#091e29;border-color:#b7925d55}.inputline input:focus{border-color:#deb978;box-shadow:0 0 0 3px #dbb77d22}
+.primary{background:linear-gradient(135deg,#f0d8a4,#d4a25d);color:#233039;box-shadow:0 6px 20px #0002}.primary:hover{filter:brightness(1.05)}
+.chip{background:#b28b5016;border-color:#c49e654a;color:#f3dfbd}.chip:hover{background:#9e80424b}
+.turn .q{background:#2c5059;color:#fff6e8}.turn .a{background:#2f4b41;border-color:#639c7b;color:#def5d2}.turn .a.bad{background:#4d3134;color:#ffc9b9}.turn .a.uncertain{background:#4b4030;color:#f7deaa}
+.reveal{background:linear-gradient(120deg,#234b4c,#1a3440);border-color:#d9b67769}.reveal h4{color:#f2d6a4}.join{font-weight:900}
+.rules{border:1px solid #c8ab7342;border-radius:14px;background:#142f3b;color:#d0dad6}
+.callWrap{background:rgba(1,13,22,.89);backdrop-filter:blur(18px);padding:20px}
+.call{width:min(1390px,100%);height:min(870px,calc(100vh - 40px));min-height:575px;grid-template-columns:minmax(420px,1.18fr) minmax(335px,.82fr);border:1px solid #d8af705d;border-radius:22px;background:#0b2430;box-shadow:0 25px 100px #000c}
+.video{overflow:hidden;background:radial-gradient(ellipse at 52% 32%,#3c6b6c 0,#163e4d 33%,#0b2430 72%),#0b2430;isolation:isolate}
+.video:before{inset:15px;border-radius:16px;border-color:#d6bc824b}
+.video:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 73% 28%,#ffdeb524 0 12%,transparent 15%),radial-gradient(circle at 18% 30%,#d0ad6322,transparent 44%),repeating-linear-gradient(25deg,transparent 0 54px,#e8cfa806 54px 55px)}
+.vTop{padding:27px 30px;z-index:3}.callName{font:700 35px/1.2 "STKaiti","KaiTi",serif;letter-spacing:.14em;color:#f5daa1;margin-top:10px}.duration{color:#c3d4d7}.live{background:#284d42;color:#c2eac5;border-color:#75b98b77}
+.figure{width:min(525px,83%);height:100%;max-height:525px;flex:1;min-height:245px;z-index:2;align-items:end;filter:drop-shadow(0 18px 30px #0008)}
+.figure:after{width:75%;height:18px;bottom:5px}
+.figure .portrait{width:100%;height:100%;max-height:100%;object-fit:contain;transition:filter .2s ease;animation:breath 5s ease-in-out infinite;transform-origin:50% 83%}
+.figure .portrait .haloRing{animation:goldAura 4s ease-in-out infinite alternate;transform-origin:center}
+.figure .portrait .eye-close{opacity:0;animation:blink 6.1s infinite}
+.figure .portrait .mouth-opening{transform-box:fill-box;transform-origin:50% 45%;transform:scaleY(.045);opacity:0;transition:opacity .1s}
+.figure.speaking .portrait .mouth-opening{opacity:1;animation:talk2 .20s ease-in-out infinite alternate}
+.figure.speaking .portrait .mouth-line{opacity:.05}
+.figure.speaking .portrait{animation:speechFloat 1.8s ease-in-out infinite alternate}
+.figure .portrait .lip-shadow{opacity:1}.figure.speaking .portrait .lip-shadow{opacity:.5}
+.figure.speaking .haloRing{animation:goldAura .95s ease-in-out infinite alternate}
+@keyframes breath{0%,100%{transform:translateY(1px) scale(1)}50%{transform:translateY(-4px) scale(1.006)}}
+@keyframes goldAura{from{opacity:.46;transform:scale(.98)}to{opacity:.8;transform:scale(1.045)}}
+@keyframes blink{0%,43%,46%,88%,91%,100%{opacity:0}44.2%,89.3%{opacity:1}}
+@keyframes talk2{0%{transform:scaleY(.26)}35%{transform:scaleY(.75)}100%{transform:scaleY(1.2)}}
+@keyframes speechFloat{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.roleline{background:#0c2c37ad;padding:8px 21px;border:1px solid #c0a26944;border-radius:70px;color:#ead6b7;font-size:12px}
+.wave{z-index:2;height:30px}.wave i{background:#f6d392;width:5px}.wave.active i{box-shadow:0 0 11px #ffd79288}
+.controls{gap:21px;padding-bottom:22px;z-index:3}.callbtn{background:#113b46b0;border:1px solid #d9bb8459;color:#f8e7c6;box-shadow:inset 0 0 15px #dda6601a}.callbtn.end{background:#c34e49;box-shadow:0 7px 28px #ae40376a}.ctrlcol{color:#e7dbc8}
+.chat{background:#e8e2d3;color:#3c3630}.chatTop{background:#f6f1e5;border-bottom:1px solid #d8caaf}.chatTop strong{font-family:"Songti SC",serif;color:#233c40;font-size:18px}.messages{background:linear-gradient(#f1e9d9ee,#e8dfcbee),repeating-linear-gradient(0deg,transparent 0 21px,#bda36c15 21px 22px)}
+.bubble{background:#fffbf2;color:#314247;box-shadow:0 3px 13px #544e4120;border-radius:13px 13px 13px 3px;font-size:14px}.me .bubble{background:#d0e6ce;color:#203e36}.tinyAvatar{background:#254c4d}
+.compose{background:#f5efe2}.compose input{background:#fffdf8!important;border-color:#c5b696!important;color:#21343e!important}.compose button{background:linear-gradient(135deg,#d0ac70,#b78348)!important;color:#fff9ec!important}
+.promptRow{background:#f0e9d8}.promptRow button{background:#fffaf0;border-color:#c6b38c;color:#66543e}.notice{background:#f5eee1;color:#807968!important;border-color:#dac7a4}
+.v2ArtBadge{position:absolute;left:26px;bottom:142px;z-index:2;writing-mode:vertical-rl;font-family:"STKaiti",serif;font-size:16px;letter-spacing:.3em;color:#dfcb9cbd;border-left:1px solid #d9b77550;padding-left:11px;pointer-events:none}
+.v2ArtCaption{font-size:10px;position:absolute;right:25px;bottom:130px;color:#e8d4b7b3;z-index:2;text-align:right;max-width:154px;line-height:1.65;pointer-events:none}
+.v2CharacterGuide{padding:12px 17px;background:#f8f0db;border-left:3px solid #c29a5d;font-size:12px;line-height:1.6;color:#655540}
+.v2QuickBtn{background:#e7c4861a;border:1px solid #dabb8173;color:#ffe4bb;padding:9px 13px;border-radius:10px;font-size:12px;cursor:pointer}
+.v2QuickBtn:hover{background:#e7c48635}
+.heroExp{display:flex;gap:9px;align-items:center;margin-top:18px;flex-wrap:wrap}
+@media(max-width:1060px){.heroPortrait{right:13px;opacity:.6}.hero>div:first-child{position:relative;z-index:2}.call{grid-template-columns:minmax(340px,1fr) minmax(310px,.9fr)}}
+@media(max-width:760px){.shell{padding:14px}.hero{padding:22px 22px 28px;min-height:260px}.heroPortrait{opacity:.18;right:-75px}.hero h2{font-size:31px}.rightHead .pill{display:none}.callWrap{padding:5px}.call{height:calc(100dvh - 10px);min-height:0;grid-template-columns:1fr;grid-template-rows:minmax(295px,47%) minmax(270px,53%);border-radius:15px}.vTop{padding:15px 20px 7px}.callName{font-size:25px}.figure{min-height:130px;width:min(300px,54%);max-height:235px}.roleline{font-size:10px;margin-bottom:4px;padding:5px 12px}.wave{margin:0;height:17px}.controls{padding:4px 8px 9px;gap:12px}.callbtn{height:42px;width:42px;font-size:18px}.callbtn.end{width:48px;height:48px}.ctrlcol{font-size:9px;gap:3px}.v2ArtBadge,.v2ArtCaption{display:none}.messages{padding:13px}.notice{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.figure .portrait,.figure .portrait .eye-close,.figure .portrait .haloRing{animation:none}.figure.speaking .portrait .mouth-opening{animation:talk2 .36s ease-in-out infinite alternate}}
+
+
+/* ---- 时空来电 3.3 · 月下访古 ---- */
+:root{--teal-950:#061b24;--teal-900:#082833;--gold:#dbb97d;--gold-light:#fae4b9}
+body{background:radial-gradient(ellipse at 70% -10%,#1c5051a1 0,transparent 46%),radial-gradient(ellipse at -15% 86%,#765d3142 0,transparent 45%),#071d27}
+.hero{background:linear-gradient(100deg,#113c43e8 0%,#0d2b33ee 48%,#142a32 100%),radial-gradient(ellipse at 80% 20%,#ad86523d,transparent 50%);border-color:#deb97a6a}
+.hero:before{background:linear-gradient(105deg,transparent 40%,#e8bc8418 70%),repeating-linear-gradient(50deg,transparent 0 29px,#ead9a40a 30px 31px)}
+.brand h1{letter-spacing:.06em}.brandmark{border-radius:50%;border:1px solid #ffe7ac55}
+.steps .step{transition:transform .2s,background .2s}.steps .step.active{transform:translateY(-2px);box-shadow:0 9px 18px #0003}
+.panel{background:linear-gradient(170deg,#153b43f2,#0b242ff5)}
+.callWrap{background:rgba(1,14,20,.93)}
+.call{border-radius:26px;border:1px solid #eac78b72;box-shadow:0 35px 110px #000c;grid-template-columns:minmax(450px,1.14fr) minmax(345px,.86fr)}
+.video{background:radial-gradient(ellipse at 50% 47%,#2d5b5d,#0b2b36 62%,#061923 95%)}
+.video:after{background:radial-gradient(circle at 84% 22%,#ffe2a31a 0 13%,transparent 21%),repeating-linear-gradient(30deg,transparent 0 68px,#c4a67806 69px 70px);z-index:0}
+.vTop{position:relative;z-index:5}.callName{font-size:39px;color:#ffe1a9;text-shadow:0 4px 24px #0008}.duration{font-size:14px;color:#e0daca}
+.live{font-size:12px;background:#2c543ccc;color:#d9f9d4}
+.figure{width:min(560px,90%);height:100%;max-height:550px;min-height:170px;overflow:visible;z-index:2;display:flex;align-items:center;justify-content:center;filter:none}
+.figure::after{display:none}
+.photoStage{width:min(100%,510px);height:100%;min-height:220px;max-height:535px;position:relative;display:flex;align-items:flex-end;justify-content:center;isolation:isolate;filter:drop-shadow(0 14px 28px #04151a99);animation:photoBreathe 4.8s ease-in-out infinite alternate}
+.photoStage:before{content:'';position:absolute;inset:0 4% 18% 4%;border:1px solid #ead19b44;border-radius:50% 50% 13% 13%;box-shadow:0 0 42px #fbdba51b,inset 0 0 38px #ffe0a311;z-index:1;pointer-events:none}
+.photoAvatar{height:100%;width:100%;object-fit:contain;object-position:center bottom;border-radius:13px;mask-image:linear-gradient(to bottom,transparent 0%,#000 6%,#000 81%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 6%,#000 81%,transparent 100%);display:block;user-select:none}
+.photoStage .photoEdge{position:absolute;inset:4% -1% 22%;z-index:1;border:1px solid #fce0a929;border-radius:48%;pointer-events:none;box-shadow:0 0 23px #eed3991c}
+.photoStage .photoBreath{position:absolute;inset:12% 10% 26%;z-index:-1;border-radius:50%;background:radial-gradient(circle,#f2c57f36,transparent 65%);opacity:.24}
+.figure.speaking .photoBreath{opacity:.85;animation:goldAura .75s ease-in-out infinite alternate}
+.portraitMiniText{position:absolute;bottom:2%;left:7%;right:7%;display:flex;justify-content:center;gap:12px;align-items:center;color:#f9e2b7;text-shadow:0 2px 9px #052029;letter-spacing:.06em;z-index:2;font-size:12px;opacity:.95}
+.portraitMiniText b{font:700 20px/1.2 'STKaiti','KaiTi',serif}.portraitMiniText span{padding-left:12px;border-left:1px solid #dfbc845e}
+.figure.speaking .photoStage{animation:photoSpeaking 1.6s ease-in-out infinite alternate}
+@keyframes photoBreathe{from{transform:translateY(2px) scale(1)}to{transform:translateY(-3px) scale(1.008)}}
+@keyframes photoSpeaking{from{transform:translateY(0px)}to{transform:translateY(-4px)}}
+.liveTranscript{position:relative;z-index:3;width:calc(100% - 62px);max-width:630px;background:linear-gradient(120deg,#133842ea,#0d2938ef);border:1px solid #e7bf7b77;border-radius:16px;padding:10px 17px 12px;margin:5px 0 6px;box-shadow:0 12px 30px #06121987;min-height:74px}
+.captionChip{font-size:10px;letter-spacing:.12em;color:#f8d99e;font-weight:750}.liveTranscript p{margin:5px 0 0;font-size:14px;line-height:1.45;max-height:63px;overflow:auto;color:#fff1db;overflow-wrap:anywhere}
+.video .roleline{margin:2px 0 5px;font-size:12px}.video .wave{height:18px;margin:2px 0 5px}.video .controls{padding:8px 12px 18px;gap:17px}
+.callbtn{transition:transform .2s,filter .2s,box-shadow .2s}.callbtn:hover{transform:translateY(-3px);filter:brightness(1.12)}.callbtn:focus-visible,.mini:focus-visible{outline:3px solid #ffdfa5;outline-offset:3px}
+#micBtn.off{box-shadow:0 0 25px #6fe2b16a;background:#216c5d}
+.heroPortrait{right:53px;bottom:-19px;width:250px;min-width:250px;height:280px;overflow:hidden;align-items:stretch;border-radius:50% 50% 7% 7%}
+.heroPortrait .photoStage{width:100%;height:100%;min-height:0;animation:none}.heroPortrait .photoAvatar{mask-image:linear-gradient(#000 0 72%,transparent 99%);-webkit-mask-image:linear-gradient(#000 0 72%,transparent 99%)}
+.heroPortrait .portraitMiniText{display:none}
+@media(max-width:1050px){.call{grid-template-columns:minmax(350px,1fr) minmax(310px,.9fr)}.figure{max-height:470px}}
+@media(max-width:760px){.call{grid-template-columns:1fr;grid-template-rows:minmax(390px,49dvh) minmax(300px,1fr)}.figure{width:min(375px,82%);max-height:245px;min-height:95px}.photoStage{min-height:90px;max-height:245px}.liveTranscript{width:calc(100% - 34px);min-height:51px;margin:0}.liveTranscript p{font-size:12px;max-height:37px}.captionChip{font-size:9px}.portraitMiniText{bottom:1%;font-size:10px}.portraitMiniText b{font-size:16px}.video .roleline{margin:0;font-size:10px;padding:3px 9px}.video .controls{padding:1px 7px 9px;gap:12px}.video .wave{display:none}.vTop{padding:12px 16px}.callName{font-size:25px}.v2ArtCaption,.v2ArtBadge{display:none}.heroPortrait{opacity:.32;right:0}.heroPortrait .photoStage{min-height:0}}
+@media(max-width:420px){.call{grid-template-rows:minmax(370px,47dvh) minmax(310px,1fr)}.figure{max-height:222px}.photoStage{max-height:220px}.controls .ctrlcol{min-width:50px}.controls .callbtn{width:47px;height:47px;font-size:21px}.controls .callbtn.end{height:55px;width:55px}.controls{gap:6px!important}.liveTranscript{min-height:48px}}
+@media(prefers-reduced-motion:reduce){.photoStage,.figure.speaking .photoStage{animation:none}}
+
+
+/* 3.3: Face-stable mouth states; six articulation categories with photo-state approximation. */
+.photoStage{animation:none!important}
+.figure.speaking .photoStage{animation:none!important}
+.photoStack{position:relative;width:100%;height:100%;display:block;isolation:isolate;overflow:hidden;z-index:0}
+.photoStack .photoAvatar{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;border-radius:0;
+  mask-image:none;-webkit-mask-image:none;will-change:opacity;pointer-events:none;user-select:none}
+.photoStack .lipClosed{opacity:1;z-index:1}
+.photoStack .lipHalf,.photoStack .lipOpen{opacity:0;z-index:2;transition:opacity 88ms ease-out}
+.photoStack.poseHalf .lipHalf{opacity:1}
+.photoStack.poseOpen .lipOpen{opacity:1}
+.figure.speaking .photoStage .photoBreath{animation:goldAura 1.3s ease-in-out infinite alternate}
+.heroPortrait .photoStack{height:100%}
+@media(prefers-reduced-motion:reduce){.photoStack .lipHalf,.photoStack .lipOpen{transition:none!important;opacity:0!important}}
+
+/* 3.3 classroom-size portrait refinements */
+.photoStage:before,.photoStage .photoEdge{display:none!important}
+@media(max-width:760px){
+ .callWrap{padding:6px}
+ .call{height:calc(100dvh - 12px);min-height:650px;border-radius:17px;grid-template-rows:minmax(480px,62dvh) minmax(265px,1fr)}
+ .vTop{padding:10px 16px 3px}
+ .callName{font-size:26px;margin:0 0 2px}
+ .figure{min-height:220px;max-height:none;width:100%;flex:1 1 250px}
+ .photoStage{min-height:215px;max-height:none;width:min(96%,400px);height:100%}
+ .photoStack .photoAvatar{object-fit:contain}
+ .portraitMiniText{bottom:2%;font-size:11px}
+ .liveTranscript{width:calc(100% - 28px);min-height:62px;max-height:77px;padding:8px 12px;margin:0 auto 2px}
+ .liveTranscript p{font-size:12px;max-height:38px}
+ .video .roleline{display:none}
+ .video .wave{display:none}
+ .video .controls{padding:7px 8px 12px;gap:10px}
+ .ctrlcol{font-size:10px}
+ .chat{min-height:0}
+}
+@media(max-width:420px){
+ .call{grid-template-rows:minmax(474px,60dvh) minmax(265px,1fr)}
+ .figure{min-height:235px}
+ .photoStage{min-height:225px}
+}
+
+/* 3.2 six-viseme mouth rig: six discrete shapes, not whole-face scaling. */
+.figure[data-viseme] .mouth-rig>g{opacity:0;transition:opacity 65ms linear}
+.figure[data-viseme="closed"] .mouth-rig>g.mouth-closed{opacity:1}
+.figure[data-viseme="half"] .mouth-rig>g.mouth-half{opacity:1}
+.figure[data-viseme="open"] .mouth-rig>g.mouth-open{opacity:1}
+.figure[data-viseme="wide"] .mouth-rig>g.mouth-wide{opacity:1}
+.figure[data-viseme="round"] .mouth-rig>g.mouth-round{opacity:1}
+.figure[data-viseme="spread"] .mouth-rig>g.mouth-spread{opacity:1}
+.figure .mouth-rig{pointer-events:none}
+.photoStack.poseHalf .lipHalf{opacity:1}
+.photoStack.poseOpen .lipOpen{opacity:1}
+.visemeLab{z-index:3;display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:0 12px 8px;max-width:100%}
+.visemeLab button{background:#0c3441c9;border:1px solid #d9bb8459;color:#f6e6c8;border-radius:999px;padding:5px 9px;font-size:10px;letter-spacing:.02em}
+.visemeLab button:active,.visemeLab button.active{background:#d5b77d;color:#26353a}
+@media(max-width:760px){.visemeLab{gap:4px;padding:0 5px 5px}.visemeLab button{font-size:9px;padding:4px 7px}}
+
+
+
+@media(max-width:760px){
+ .visemeLab,.actionLab{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;max-width:100%;padding-left:9px;padding-right:9px}
+ .visemeLab::-webkit-scrollbar,.actionLab::-webkit-scrollbar{display:none}
+ .visemeLab button,.actionLab button{flex:0 0 auto;white-space:nowrap}
+ .actionLab .actionTitle{flex:0 0 auto;width:auto;text-align:left;margin:0 2px 0 0}
+ .figure{min-height:112px;max-height:205px}
+}
+
+/* 3.3：动作演绎控制条与人物轻动作；动作是立绘层的视觉演绎，不冒充真人动作捕捉 */
+.actionLab{z-index:3;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;padding:0 12px 9px;max-width:100%}
+.actionLab .actionTitle{font-size:10px;color:#e8d0a6;letter-spacing:.08em;margin-right:3px}
+.actionLab button{background:#193d43d9;border:1px solid #d9bb8459;color:#f6e6c8;border-radius:999px;padding:5px 9px;font-size:10px}
+.actionLab button.active{background:#d5b77d;color:#26353a;box-shadow:0 0 13px #e7c98b55}
+.figure[data-action="greet"]{animation:actionGreet .9s ease-in-out 2}
+.figure[data-action="recite"]{animation:actionRecite 1.15s ease-in-out 2}
+.figure[data-action="think"]{animation:actionThink 1.3s ease-in-out 1}
+.figure[data-action="laugh"]{animation:actionLaugh .42s ease-in-out 4}
+.figure[data-action="look"]{animation:actionLook 1.5s ease-in-out 1}
+.figure[data-action="nod"]{animation:actionNod .38s ease-in-out 3}
+@keyframes actionGreet{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-4px) rotate(-1.1deg)}65%{transform:translateX(4px) rotate(1.1deg)}}
+@keyframes actionRecite{0%,100%{transform:translateY(0) rotate(0) scale(1)}35%{transform:translateY(-7px) rotate(-.7deg) scale(1.012)}70%{transform:translateY(-2px) rotate(.5deg) scale(1.006)}}
+@keyframes actionThink{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-3px) rotate(1.2deg)}70%{transform:translateY(1px) rotate(.4deg)}}
+@keyframes actionLaugh{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(-.8deg)}}
+@keyframes actionLook{0%,100%{transform:translateX(0) rotate(0)}45%{transform:translateX(8px) rotate(1.1deg)}75%{transform:translateX(4px) rotate(.4deg)}}
+@keyframes actionNod{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(5px) rotate(.4deg)}}
+@media(max-width:760px){.actionLab{gap:4px;padding:0 5px 6px}.actionLab button{font-size:9px;padding:4px 7px}.actionLab .actionTitle{width:100%;text-align:center;margin:0 0 2px}}
+@media(prefers-reduced-motion:reduce){.figure[data-action]{animation:none!important}}
+
+
+/* 3.4 API设置：触控友好、状态可见，不依赖外部UI库 */
+.authNew{max-width:590px;text-align:left}
+.authNew .fieldLabel{display:block;margin:13px 0 6px;color:#c6e4f2;font-size:13px;font-weight:700}
+.authNew input{display:block;width:100%;min-width:0;background:#082338;border:1px solid #54839a;border-radius:11px;color:#effaff;padding:12px;font:inherit;outline:none}
+.authNew input:focus{border-color:#8be4e0;box-shadow:0 0 0 3px #50ded426}
+.authNew .keyLine{display:flex;gap:8px;align-items:center}
+.authNew .keyLine input{flex:1}
+.authNew .fieldHint{font-size:12px;color:#9bbbcf;line-height:1.65;margin:6px 0}
+.authNew .helpBtns{display:flex;flex-wrap:wrap;gap:8px}
+.authNew #authTip{min-height:23px;font-weight:650;word-break:break-word}
+@media(max-width:650px){.authNew{max-width:95vw;max-height:82dvh;overflow:auto}.authNew .helpBtns>button{flex:1 1 auto}}
+
+/* 3.5 快速 AI 推理和一键揭晓 */
+.quickReveal{padding:0 22px 17px;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.revealDirect{width:100%;background:linear-gradient(90deg,#d1a46e2e,#51d0bd19);border:1px solid #d5bd846b;color:#ffe4b0;font-weight:750;padding:13px 16px}
+.revealDirect:hover{background:#ba985035}
+#guessStatus{line-height:1.5;text-align:center}
+#guessStatus.waiting{color:#fbda8b}
+#guessStatus.connected{color:#a7efd8}
+@media(max-width:710px){.quickReveal{padding:0 12px 14px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="header"><div class="brand"><div class="brandmark">⌛</div><div><div class="eyebrow">GUOHUAI STEM × HISTORY × AI</div><h1>时空来电 · 历史人物互动实验室</h1></div></div><div class="rightHead"><button class="mini" id="fullscreenBtn" title="全屏课堂投影">⛶ 全屏授课</button><span class="pill">◈ 国槐计划 · 初中课堂</span><button id="authBtn" class="mini">🔑 填写 DeepSeek 密钥</button><button id="teacherBtn" class="mini">教师演示</button><button id="resetBtn" class="mini">↻ 新开一局</button></div></header>
+  <section class="hero"><div><div class="eyebrow">GUOHUAI PLAN · HISTORICAL IMMERSIVE LAB</div><h2>时空来电 <span style="font-size:.5em;vertical-align:middle">3.5</span><br/>让千年人物 <span>与你对话</span></h2><p>先与 AI 侦探快速问答，猜不出就一键揭晓；再拨通时空电话，让唐宋诗人“开口”回答你的问题。升级为六类发音口型，并加入挥手致意、吟诗、沉思、开怀、远望、点头等动作演绎；口型依据中文拼音韵母与浏览器朗读边界估算。</p></div><div class="heroPortrait" id="heroPortrait" aria-hidden="true"></div></section>
+  <div class="steps"><span class="step active" id="step1">01 · 身份推理</span><span class="step" id="step2">02 · 人物揭晓</span><span class="step" id="step3">03 · 时空通话</span></div>
+  <main class="layout">
+    <section class="panel"><div class="panelHead"><h3>神秘历史人物</h3><span class="tiny">10 位人物 · 快速 AI 判断 · 一键揭晓</span></div><div class="mysteryStage"><div class="seal"><span class="unknown" id="mask">?</span></div><h3 id="mysteryTitle">人物已选好，开始提问吧！</h3><p id="mysteryDesc">每轮问一个可以回答“是 / 不是”的问题；复杂问题交给 AI 快速判断。<br>正式猜测可以直接输入“我猜是李白”，也可一键揭晓。</p></div><div class="progress" id="progress"></div><div class="quickReveal"><button type="button" id="revealDirectBtn" class="ghost revealDirect">✨ 猜不出来？直接揭晓并开始通话</button><span id="guessStatus" class="tiny" role="status">常见问题即时回答 · AI 处理复杂问题</span></div><div style="padding:0 22px 20px;"><div id="reveal" class="reveal"><h4 id="revealName"></h4><p id="revealBio"></p><strong style="font-size:13px;color:#95e6d5">可核验的三个线索</strong><ol id="revealClues"></ol><button id="joinBtn" class="primary join">📞 拨通时空电话 · 与人物对话</button></div></div></section>
+    <section class="panel"><div class="panelHead"><h3>💬 推理对话记录</h3><span class="tiny" id="roundCount">已提问 0 轮</span></div><div class="log" id="gameLog"><div class="logEmpty">把你们的问题告诉“时空侦探”。<br>它不会主动补充任何线索。</div></div><div class="smallFooter"><span>只回答：是 / 不是 / 不确定</span><span>合理使用 AI · 鼓励史料核验</span></div><div class="entry"><div class="inputline"><input type="text" id="gameInput" maxlength="150" autocomplete="off" placeholder="例如：他生活在唐朝吗？" aria-label="输入历史人物问题" /><button id="askBtn" class="primary">发送 →</button></div><div class="chips"><button class="chip" data-q="他生活在唐朝吗？">唐朝人物？</button><button class="chip" data-q="他是诗人吗？">他是诗人？</button><button class="chip" data-q="他与科学研究有关吗？">和科学有关？</button><button class="chip" data-q="她是女性吗？">她是女性？</button></div><p class="tip">提示：快捷问题优先使用已核校的历史资料，复杂问题交给 DeepSeek Flash 快速判断；超时将回答“不确定”。不想继续猜可随时点击“直接揭晓”。</p></div></section>
+  </main>
+  <div class="rules"><strong>教师建议：</strong>将全班分成 3–5 组，轮流提出“可回答是/不是”的问题。猜中后请各组分别提出一个有深度的问题：时代背景、历史贡献、生活方式、史料可靠性或现代启示。<br><strong>说明：</strong>这里的“视频通话”是虚拟人物动画，不是真实历史影像或真实人物原声；无需安装 Python：在线 DeepSeek 对话需先部署 Cloudflare Worker，并在顶部填写密钥；双击本地 HTML 可运行常见线索的快速判断、谜底揭晓与离线对话；复杂问题需配置 AI。</div>
+</div>
+<div id="callWrap" class="callWrap" role="dialog" aria-label="历史人物模拟通话界面" aria-modal="true"><div class="call"><div class="video"><div class="vTop"><div><div class="eyebrow">时空连线 · 虚拟情景演绎</div><div id="callName" class="callName">历史人物</div><div class="duration" id="callTime">00:00 · 通话中</div></div><span class="live">● 连线成功</span></div><div class="figure" id="figure"></div><div class="liveTranscript" id="liveTranscript"><span class="captionChip">◉ 时空同声字幕</span><p id="captionText">与历史人物连线后，这里将显示对话内容。</p></div><div class="v2ArtBadge" id="v2ArtBadge">时空留影</div><div class="v2ArtCaption" id="v2ArtCaption">参考古代人物绘画中的服饰与气质<br>现代艺术化演绎，非真实肖像</div><p class="roleline" id="callRole">正在连接过去的声音…</p><div id="voiceWave" class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="visemeLab" id="visemeLab" aria-label="六类口型手动测试"><button data-viseme-test="closed">闭合</button><button data-viseme-test="half">微张</button><button data-viseme-test="open">自然开口</button><button data-viseme-test="wide">大张</button><button data-viseme-test="round">圆唇</button><button data-viseme-test="spread">扁唇</button></div><div class="actionLab" id="actionLab" aria-label="人物动作演示"><span class="actionTitle">动作演绎</span><button data-action="greet">挥手致意</button><button data-action="recite">吟诗举杯</button><button data-action="think">沉思片刻</button><button data-action="laugh">开怀一笑</button><button data-action="look">远望山河</button><button data-action="nod">点头回应</button></div><div class="controls"><div class="ctrlcol"><button class="callbtn" id="micBtn" title="语音提问">🎙</button><span id="micLabel">语音提问</span></div><div class="ctrlcol"><button class="callbtn" id="speakerBtn" title="关闭/开启朗读">🔊</button><span>语音播报</span></div><div class="ctrlcol"><button class="callbtn" id="demoTalkBtn" title="测试动态口型">◉</button><span>口型演示</span></div><div class="ctrlcol"><button class="callbtn end" id="endBtn" title="挂断电话">☎</button><span>挂断</span></div></div></div><div class="chat"><div class="chatTop"><strong>与历史人物交流</strong><span id="modeLabel" class="mode offline">本地知识演示</span></div><div class="messages" id="messages"></div><div class="promptRow"><button data-chat="你最重要的贡献是什么？">你的贡献</button><button data-chat="你生活的时代有什么特点？">你的时代</button><button data-chat="你有什么代表作品？">代表作品</button><button data-chat="你有什么想对今天的初中生说的话？">给学生的话</button></div><div class="compose"><input type="text" id="chatInput" maxlength="450" placeholder="向历史人物提问…" aria-label="输入通话问题" /><button id="chatSend">发送</button></div><div class="notice">⚑ 历史角色扮演属于 AI 情景模拟，非历史人物真实肖像或原声。六类口型由拼音韵母规则与浏览器朗读边界估算驱动；浏览器 speechSynthesis 不提供稳定的逐音素音频时间戳，因此这仍是近似口型同步，不是专业数字人的精准音素级同步；关键史实请核对可靠资料。浏览器语音识别可能借助外部服务。</div></div></div></div>
+<div id="authModal" role="dialog" aria-modal="true" aria-label="DeepSeek API 设置"><div class="modal authNew">
+<h3>🔑 DeepSeek AI 设置</h3>
+<p>在这里粘贴你的密钥即可，无需修改网页代码。<strong>密钥只保留在本次页面的内存中，刷新即清除</strong>；不会存进 GitHub、浏览器本地存储或项目文件。请勿向学生展示。</p>
+<label class="fieldLabel" for="apiKeyInput">DeepSeek API Key（教师私密）</label>
+<div class="keyLine"><input id="apiKeyInput" type="password" spellcheck="false" autocomplete="off" placeholder="粘贴 sk- 开头的 API 密钥" aria-label="DeepSeek API 密钥"><button class="ghost" type="button" id="toggleKeyBtn">显示</button></div>
+<label class="fieldLabel" for="workerUrlInput">云端代理地址（首次设置一次）</label>
+<input id="workerUrlInput" type="url" inputmode="url" spellcheck="false" autocomplete="off" placeholder="https://你的项目.你的用户名.workers.dev" aria-label="Cloudflare Worker 地址">
+<p class="fieldHint">使用 GitHub Pages 展示网站时，需要 Cloudflare Worker 帮你转发到 DeepSeek；不需要 Python。这里填写的是 Worker 地址，不是 github.io 地址。代理网址会记在此浏览器，密钥不会。</p>
+<label class="fieldLabel" for="pinInput">教师口令（选填，若 Worker 配置了 CLASSROOM_PIN 则必须填写）</label>
+<input id="pinInput" type="password" autocomplete="off" placeholder="未启用课堂口令可留空" aria-label="教师口令">
+<p id="authTip" class="tip" role="status">未连接时，猜谜和离线通话仍可使用。</p>
+<div class="helpBtns"><button id="pinSave" class="primary" type="button">保存设置并检测连接</button><button id="pinClear" class="ghost" type="button">清除本次密钥</button><button id="pinClose" class="ghost" type="button">关闭</button></div>
+</div></div>
+<div id="teacherModal"><div class="modal"><h3>🎓 教师演示入口</h3><p>可直接选择人物演示通话，便于你课前测试。<strong>课堂正式猜谜时不要打开此面板</strong>，以免提前透露答案。</p><div id="personGrid" class="personGrid"></div><div class="helpBtns"><button class="ghost" id="closeTeacher">关闭</button></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+<!-- 已移除同步外部拼音脚本；离线也可立即启动 -->
+<script src="./config.js"></script>
+<script>
+window.addEventListener('error',e=>{const b=document.getElementById('runtimeAlert');if(b){b.hidden=false;b.textContent='网页运行异常：'+(e.message||'请检查文件是否完整解压')+'。请把这段错误发给我。'}});
+</script>
+<div id="runtimeAlert" hidden role="alert" style="position:fixed;z-index:9999;bottom:12px;left:12px;right:12px;padding:12px;background:#5e1723;border:1px solid #ff9494;color:white;border-radius:12px;font-size:14px"></div>
+<script>
+"use strict";
+// The ten allowed historical figures and curated teaching facts. Never use guessed facts as settled history.
+const PEOPLE=[
+{id:'quyuan',name:'屈原',era:'战国时期',dyn:'战国',type:'诗人、政治人物',female:false,poet:true,scientist:false,history:false,naval:false,works:['离骚','天问','九歌'],aliases:['楚国','爱国','汨罗江','楚辞','端午'],bio:'战国时期楚国诗人与政治人物，中国早期重要的抒情诗人，代表作《离骚》。',clues:['生活在战国时期的楚国。','《离骚》是其最重要的代表作之一。','与中国文学中的“楚辞”传统紧密相关。'],color:'#6ab4d7',coat:'#2b5579',talk:{greet:'远方的后学，你好。我是屈原。今日隔着漫长岁月与你交谈，愿你既有好奇心，也有求证的精神。',contribution:'我的诗歌在中国文学史上有重要位置，尤其是《离骚》所体现的抒情传统。今天讨论我时，也要把后世传说与可以核验的文本区分开。',era:'我生活在战国，诸侯之间纷争激烈。我曾参与楚国政治，后来的人们也常从忧国的角度阅读我的诗歌。',works:'我的代表作常提到《离骚》《天问》等。学习这些作品，可以观察古人如何使用丰富的意象表达思想。',study:'不要只是背诵我的名字。读一段《离骚》，试着查找它的时代背景，再提出自己的理解。'}},
+{id:'simaqian',name:'司马迁',era:'西汉',dyn:'汉',type:'史学家',female:false,poet:false,scientist:false,history:true,naval:false,works:['史记'],aliases:['太史令','纪传体','史学','历史'],bio:'西汉史学家，撰写《史记》，以人物传记为中心记述从上古至汉武帝时期的历史。',clues:['生活在西汉时期。','撰写了《史记》。','《史记》采用纪传体体例，对后世史学影响深远。'],color:'#bca5d7',coat:'#514873',talk:{greet:'你好，我是司马迁。既然跨越了时代相见，就请你尽管提问，但也要记得：历史需要证据。',contribution:'我撰写《史记》，努力通过本纪、世家、列传等体例组织历史叙事。研究历史不能只靠一个人的讲述。',era:'我生活在西汉。那是中央集权王朝不断发展、疆域与交流也发生变化的时代。',works:'我的代表作品是《史记》。你可以从《项羽本纪》或《孔子世家》等篇章中体会历史人物叙事。',study:'读史时可以先问三个问题：史料来自哪里？作者如何组织叙述？还有没有其他解释？'}},
+{id:'cailun',name:'蔡伦',era:'东汉',dyn:'汉',type:'造纸技术改进者',female:false,poet:false,scientist:true,history:false,naval:false,works:[],aliases:['纸','造纸术','技术','发明','材料'],bio:'东汉人物，与改进造纸工艺相关。中国纸张的使用早于蔡伦，他的重要性在于推动改进和推广。',clues:['生活在东汉时期。','与造纸工艺的改进密切相关。','不是“世界上第一个使用纸的人”；更准确的说法是与改进造纸技术有关。'],color:'#b2c68e',coat:'#4a6256',talk:{greet:'你好，我是蔡伦。听说今天的人们能把大量文字装进一块小小的屏幕，真是奇妙。',contribution:'我常被后人和造纸术联系起来。更准确地说，我与改进和推广造纸技术有关，纸并非在我之前完全不存在。',era:'我生活在东汉。书写材料与知识传播的发展，是认识那个时代的重要线索。',works:'我并非以诗词著作闻名。研究我，更适合查一查纸张制作和书写材料的变化。',study:'技术史最值得追问的是：原料从哪里来？步骤怎样改进？成本如何降低？让证据回答这些问题。'}},
+{id:'zhangheng',name:'张衡',era:'东汉',dyn:'汉',type:'天文学家、数学家、文学家',female:false,poet:true,scientist:true,history:false,naval:false,works:['二京赋'],aliases:['地动仪','浑天仪','天文','地震','仪器'],bio:'东汉学者，在天文、数学、文学和仪器制作等方面有贡献，常与候风地动仪联系在一起。',clues:['生活在东汉。','在天文学和仪器研究方面有重要贡献。','相传创制候风地动仪，具体结构和性能仍存在学术讨论。'],color:'#5bc3db',coat:'#2c607a',talk:{greet:'你好，我是张衡。你们今天还能研究天空与大地的规律，真让我高兴。',contribution:'我涉猎天文、文学与数学，也与候风地动仪有关。不过，地动仪复原方式与性能仍有争论，不能把现代模型说成我的原件。',era:'我生活在东汉，古人通过长期观测天象来认识时间、季节与宇宙。',works:'我的文学作品有《二京赋》，我也以天文研究和仪器设计闻名。',study:'我最愿意看到你们自己动手做模型，但模型能否工作，要让实验和测量来回答。'}},
+{id:'zuchongzhi',name:'祖冲之',era:'南北朝时期',dyn:'南北朝',type:'数学家、天文学家',female:false,poet:false,scientist:true,history:false,naval:false,works:['缀术'],aliases:['圆周率','π','数学','天文','大明历'],bio:'南北朝数学家与天文学家，对圆周率计算与历法研究有重要贡献。',clues:['生活在南北朝时期。','将圆周率推算到 3.1415926 与 3.1415927 之间。','与祖暅等人的数学、历法研究相关。'],color:'#d5ae72',coat:'#73543c',talk:{greet:'你好，我是祖冲之。你们今天计算圆周率，是不是已经可以用计算机了？',contribution:'我的数学工作中，圆周率近似值是广为人知的成果之一：它位于 3.1415926 和 3.1415927 之间。',era:'我生活在南北朝，政权更迭频繁，但数学与天文历法研究仍在发展。',works:'后人常提到数学著作《缀术》，但这部书已佚失。',study:'数学不仅是得到答案，更重要的是解释过程、估计误差、检查结果。'}},
+{id:'libai',name:'李白',era:'唐朝',dyn:'唐',type:'诗人',female:false,poet:true,scientist:false,history:false,naval:false,works:['静夜思','将进酒','蜀道难'],aliases:['诗仙','浪漫','月亮','酒'],bio:'唐代诗人，诗歌风格丰富，常以想象奔放、语言明快著称，后世称“诗仙”。',clues:['生活在唐朝。','有《静夜思》《将进酒》等著名诗作。','后世常称其为“诗仙”。'],color:'#6dace4',coat:'#35598a',talk:{greet:'哈哈，远方的小友，竟能穿越千年与我相见！我是李白。你愿先谈诗，还是先谈这大千世界？',contribution:'我以诗歌为人熟知。山河、友情、理想与人生际遇，都可以成为诗的主题。',era:'我生活在唐朝，一个诗歌创作活跃、文化交流广泛的时代。',works:'《静夜思》《将进酒》《蜀道难》都是后世广为传诵的作品。理解诗歌时别只靠一句“浪漫”，也要看具体内容。',study:'多读、多观察、多想象，但也要认真推敲语言。真正的表达来自真实的体验。'}},
+{id:'dufu',name:'杜甫',era:'唐朝',dyn:'唐',type:'诗人',female:false,poet:true,scientist:false,history:false,naval:false,works:['春望','登高','茅屋为秋风所破歌'],aliases:['诗圣','安史之乱','现实','草堂'],bio:'唐代诗人，作品深刻反映个人经历与社会现实，后世尊称“诗圣”。',clues:['生活在唐朝。','写过《春望》《登高》等诗篇。','后世称其为“诗圣”。'],color:'#8ab2b6',coat:'#45636d',talk:{greet:'你好，远来的学子。我是杜甫。愿你能从诗里读出人的生活与时代的变化。',contribution:'我的诗歌记录了许多个人与社会的遭遇，后人也常通过它们观察唐代历史。',era:'我生活在唐朝，并经历安史之乱带来的动荡。',works:'我的作品中，《春望》《登高》《茅屋为秋风所破歌》常被选读。',study:'学会观察普通人的生活，也要学会在理解事实的基础上表达同情与责任。'}},
+{id:'liqingzhao',name:'李清照',era:'宋朝',dyn:'宋',type:'词人',female:true,poet:true,scientist:false,history:false,naval:false,works:['声声慢','如梦令','醉花阴'],aliases:['婉约','女词人','词','易安'],bio:'宋代著名女词人，早晚期作品反映不同的生活境遇，词作艺术成就突出。',clues:['生活在宋代。','是这十位人物中唯一的女性。','《声声慢·寻寻觅觅》等词作广为流传。'],color:'#e4a6b1',coat:'#7e4a71',talk:{greet:'你好，我是李清照。愿与你谈诗词，也愿听听你们今日如何学习与生活。',contribution:'我以词作闻名，作品中的情绪和意象与人生经历常有联系。',era:'我生活在宋代，经历了社会动荡与南渡，个人生活也发生很大变化。',works:'《如梦令》《醉花阴》《声声慢》都是常见的代表词作。',study:'试着留意词里一个细小的意象，再思考它怎样传达情感；也不要把一生简化成一个标签。'}},
+{id:'sushi',name:'苏轼',era:'北宋',dyn:'宋',type:'诗人、词人、散文家、书画家',female:false,poet:true,scientist:false,history:false,naval:false,works:['水调歌头','赤壁赋','念奴娇'],aliases:['苏东坡','东坡','赤壁','豪放','书画'],bio:'北宋文学家、书画家，在诗、词、散文等方面成就突出，号东坡居士。',clues:['生活在北宋。','写过《赤壁赋》和《水调歌头·明月几时有》。','号“东坡居士”。'],color:'#dba879',coat:'#855334',talk:{greet:'你好，我是苏轼，亦号东坡。人生虽有起伏，能交新朋友，总是值得欢喜的。',contribution:'我写诗、作词、写散文，也参与书画创作。不同作品适合放在具体处境中理解。',era:'我生活在北宋，亲历政治变化与多次外放、贬谪。',works:'你或许读过《水调歌头·明月几时有》《赤壁赋》《念奴娇·赤壁怀古》。',study:'困难中也别停止观察世界、学习新事物。求知之外，也要保留幽默和关心他人的能力。'}},
+{id:'zhenghe',name:'郑和',era:'明朝',dyn:'明',type:'航海家、使节',female:false,poet:false,scientist:false,history:false,naval:true,works:[],aliases:['下西洋','船队','航海','海洋','远航','印度洋'],bio:'明代航海家、使节，奉命率船队多次远航，通常概括为“七下西洋”。',clues:['生活在明朝。','曾奉命率船队多次出海远航。','其远航活动常被称为“七下西洋”。'],color:'#7fd0be',coat:'#306f74',talk:{greet:'你好，我是郑和。你们现在可以从屏幕上看到大海另一边的世界，真不可思议。',contribution:'我在明朝奉命率船队多次远航，加强了与沿线地区的联系。远航规模、具体路线等问题还需要结合史料讨论。',era:'我生活在明朝，朝廷组织了规模较大的海上使节活动。',works:'我不以诗词著作为主要贡献。研究我，可以看航海路线、外交交流与相关史料。',study:'出发前既要有勇气，也要做周密准备。航行安全、测量、合作与尊重不同文化同样重要。'}}
+];
+const NAMES=PEOPLE.map(p=>p.name);
+const $=id=>document.getElementById(id);
+const lipControl={active:false,timer:0,started:0,text:'',pose:'closed',boundaryIndex:-1,boundaryAt:0,demoTimer:0,manualTimer:0,syllableMs:235};
+let actionTimer=0; // 在 newGame() 初始化之前声明，避免按钮脚本启动时 TDZ 错误。
+const state={person:null,solved:false,round:0,history:[],chatHistory:[],callStarted:null,timer:null,speech:true,recognizer:null,listening:false,busy:false,gameBusy:false,gameEpoch:0,guessController:null,guessCache:new Map(),ai:false,modeChecked:false,pin:'',apiKey:'',onlineHosted:false};
+const safeText=(s)=>String(s??'').replace(/\s+/g,' ').trim();
+function toast(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),3500)}
+function choose(){let x;try{let a=new Uint32Array(1);crypto.getRandomValues(a);x=a[0]%PEOPLE.length}catch(_){x=Math.floor(Math.random()*PEOPLE.length)}return PEOPLE[x]}
+function newGame(preselect=null){state.gameEpoch++;if(state.guessController){state.guessController.abort();state.guessController=null;}state.gameBusy=false;state.guessCache.clear();cancelSpeech();if(state.timer)clearInterval(state.timer);if(state.recognizer){try{state.recognizer.abort()}catch(_){}}state.person=preselect||choose();state.solved=false;state.round=0;state.history=[];state.chatHistory=[];state.callStarted=null;state.busy=false;$('gameLog').innerHTML='<div class="logEmpty">把你们的问题告诉“时空侦探”。<br>它不会主动补充任何线索。</div>';$('mysteryTitle').textContent='人物已选好，开始提问吧！';$('mysteryDesc').innerHTML='每轮问一个可以回答“是 / 不是”的问题；复杂问题交给 AI 快速判断。<br>正式猜测可以直接输入“我猜是李白”，也可一键揭晓。';$('mask').textContent='?';$('reveal').classList.remove('show');$('roundCount').textContent='已提问 0 轮';$('gameInput').disabled=false;$('askBtn').disabled=false;$('askBtn').textContent='发送 →';$('revealDirectBtn').disabled=false;$('revealDirectBtn').style.display='';$('guessStatus').textContent='常见问题即时回答 · AI 处理复杂问题';$('guessStatus').className='tiny';$('gameInput').value='';$('callWrap').classList.remove('show');$('teacherModal').classList.remove('show');setStep(1);renderProgress()}
+function setStep(k){for(let i=1;i<=3;i++){$('step'+i).className='step'+(i===k?' active':(i<k?' complete':''))}}
+function renderProgress(){const e=$('progress');e.innerHTML='';for(let i=0;i<10;i++){const b=document.createElement('i');b.className=i<Math.min(10,state.round)?'done':'';e.appendChild(b)}}
+function getGuess(q){let s=q.replace(/[？?！!。.,，\s]/g,'');const normalized=s.replace(/^(我猜|我认为|我觉得|我确定|答案是|正式猜测|猜测|应该是|人物是|就是|是)/,'').replace(/^(他|她)/,'').replace(/^是/,'');if(NAMES.includes(s)||NAMES.includes(normalized))return NAMES.includes(normalized)?normalized:s;const m=s.match(/(?:我猜|我认为|答案是|猜测|是不是|我猜是|我认为是|他是|她是|人名是|人物是)(屈原|司马迁|蔡伦|张衡|祖冲之|李白|杜甫|李清照|苏轼|郑和)(?:吗|吧|呢|呀)?$/);return m?m[1]:null}
+function classifyQuestion(q,p){const s=q.replace(/\s/g,'');if(!s||s.length<3)return'不确定';if(/[没不非]是|是不是不|不是.*吗|有没|是否没|并非|从未|不是不是/.test(s))return'不确定';
+// Avoid multiple questions, negative syntactic forms, and unsupported biographical claims.
+if(/(和|以及|还是|或者).*(吗|么|是不是)/.test(s)&& /(?:唐|宋|明|汉|写诗|科学)/.test(s))return'不确定';
+const period=[['战国',p.dyn==='战国'],['春秋',false],['秦朝',false],['西汉',p.id==='simaqian'],['东汉',['cailun','zhangheng'].includes(p.id)],['汉朝',p.dyn==='汉'],['汉代',p.dyn==='汉'],['唐朝',p.dyn==='唐'],['唐代',p.dyn==='唐'],['北宋',p.id==='sushi'],['南宋',p.id==='liqingzhao'],['宋朝',p.dyn==='宋'],['宋代',p.dyn==='宋'],['明朝',p.dyn==='明'],['明代',p.dyn==='明'],['清朝',false],['南北朝',p.dyn==='南北朝']];for(const [key,v] of period){if(s.includes(key))return v?'是':'不是'}
+if(/女(性|人|子|孩)|女性|女士|女词人/.test(s))return p.female?'是':'不是';if(/男(性|人|子)|男子/.test(s))return !p.female?'是':'不是';
+if(/诗仙/.test(s))return p.id==='libai'?'是':'不是';if(/诗圣/.test(s))return p.id==='dufu'?'是':'不是';if(/东坡居士|苏东坡/.test(s)&& !getGuess(q))return p.id==='sushi'?'是':'不是';
+const works=[...new Set(PEOPLE.flatMap(x=>x.works))];for(const w of works){if(s.includes(w))return p.works.includes(w)?'是':'不是'}
+if(/诗人|写诗|作诗|诗词|词人|文人|文学家/.test(s))return p.poet?'是':'不是';if(/历史学家|史学家|史官|编史|史书/.test(s))return p.history?'是':'不是';if(/数学家|数学研究|圆周率/.test(s))return ['zuchongzhi','zhangheng'].includes(p.id)?'是':'不是';if(/天文学家|研究天文|天象|浑天仪/.test(s))return ['zhangheng','zuchongzhi'].includes(p.id)?'是':'不是';if(/地动仪|地震仪/.test(s))return p.id==='zhangheng'?'是':'不是';if(/造纸|纸张|改进纸/.test(s))return p.id==='cailun'?'是':'不是';if(/航海|下西洋|船队|远航|海上/.test(s))return p.naval?'是':'不是';if(/政治家|当官|官员|朝廷/.test(s))return'不确定';
+if(/科学家|自然科学|科学研究|技术发明|科技/.test(s))return p.scientist?'是':'不是';if(/发明家/.test(s))return p.id==='cailun'?'是':'不是';if(/《?史记》?/.test(s))return p.id==='simaqian'?'是':'不是';if(/楚国|楚辞|汨罗江/.test(s))return p.id==='quyuan'?'是':'不是';if(/端午/.test(s))return p.id==='quyuan'?'是':'不是';if(/安史之乱/.test(s))return p.id==='dufu'?'是':'不是';if(/诗经/.test(s))return'不是';return'不确定'}
+function addTurn(q,a,kind){const log=$('gameLog');const empty=log.querySelector('.logEmpty');if(empty)empty.remove();const t=document.createElement('div');t.className='turn';const qe=document.createElement('div');qe.className='q';qe.textContent=q;const ae=document.createElement('div');ae.className='a '+((a==='还没猜中')?'bad':(a==='不确定'?'uncertain':''));ae.textContent=a;t.append(qe,ae);log.appendChild(t);log.scrollTop=log.scrollHeight;state.history.push({question:q,answer:a,kind})}
+function setGuessBusy(on,notice=''){
+ state.gameBusy=on; $('askBtn').disabled=on; $('gameInput').disabled=on;
+ $('askBtn').textContent=on?'判断中…':'发送 →';
+ if(notice){$('guessStatus').textContent=notice;$('guessStatus').className='tiny'+(on?' waiting':' connected')}
+}
+async function judgeByAI(q,p,epoch){
+ // 已核校的明确问题不必走网络，学生可立即看到结果；新的灵活问法交给 AI。
+ const local=classifyQuestion(q,p);
+ if(local!=='不确定')return {answer:local,source:'instant'};
+ const key=p.id+'|'+q.replace(/\s+/g,'').toLowerCase();
+ if(state.guessCache.has(key))return {answer:state.guessCache.get(key),source:'cache'};
+ if(!state.ai||!API_BASE||(!state.apiKey&&!state.pin))return {answer:'不确定',source:'offline'};
+ const ctrl=new AbortController();state.guessController=ctrl;
+ const timeout=setTimeout(()=>ctrl.abort(),7000);
+ try{
+  const res=await fetch(apiUrl('/api/guess'),{method:'POST',headers:{'Content-Type':'application/json',...(state.pin?{'X-Classroom-Pin':state.pin}:{}),...(state.apiKey?{'X-DeepSeek-Key':state.apiKey}:{})},body:JSON.stringify({person_id:p.id,question:q}),signal:ctrl.signal,cache:'no-store'});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok)throw Error(data.error||'AI判断服务暂不可用');
+  const a=data.answer;
+  if(!['是','不是','不确定'].includes(a))throw Error('AI结果格式不正确');
+  if(epoch===state.gameEpoch)state.guessCache.set(key,a);
+  return {answer:a,source:'ai'};
+ }catch(e){
+  if(e.name!=='AbortError')toast('AI判断暂不可用，已改为“不确定”：'+(e.message||'网络异常'));
+  return {answer:'不确定',source:'fallback'};
+ }finally{clearTimeout(timeout);if(state.guessController===ctrl)state.guessController=null}
+}
+async function ask(){
+ if(state.solved){toast('谜底已揭晓，可以拨通时空电话。');return}
+ if(state.gameBusy)return;
+ const q=safeText($('gameInput').value);if(!q){toast('请先输入一个问题');return}
+ const epoch=state.gameEpoch,p=state.person;
+ const guess=getGuess(q);
+ $('gameInput').value='';
+ let answer,source='instant';
+ if(guess){answer=guess===p.name?'猜对了':'还没猜中'}
+ else{
+  const fast=classifyQuestion(q,p);
+  if(fast==='不确定'&&state.ai&&API_BASE)setGuessBusy(true,'⚡ AI 正在快速判断…（最多等待约 7 秒）');
+  else setGuessBusy(true,fast==='不确定'?'离线模式：未知问题暂答“不确定”':'⚡ 已核校线索，即时判断');
+  const result=await judgeByAI(q,p,epoch);answer=result.answer;source=result.source;
+ }
+ if(epoch!==state.gameEpoch||state.solved)return;
+ setGuessBusy(false,source==='ai'?'✓ DeepSeek Flash 已回答':source==='instant'?'✓ 历史线索即时回答':source==='fallback'?'AI 响应超时或出错，已答不确定':source==='offline'?'离线模式：不确定；可一键揭晓':'✓ 已判断');
+ state.round++;addTurn(q,answer,guess?'guess':'question');$('roundCount').textContent='已提问 '+state.round+' 轮';renderProgress();
+ if(answer==='猜对了'){win();setTimeout(()=>{if(state.solved&&epoch===state.gameEpoch&&!$('callWrap').classList.contains('show'))startCall()},1500)}
+ else if(state.round>=8){$('guessStatus').textContent='已经问了 '+state.round+' 轮，想继续尝试或直接揭晓都可以。'}
+}
+function revealAndCall(){
+ if(state.solved){if(!$('callWrap').classList.contains('show'))startCall();return}
+ state.gameEpoch++;
+ if(state.guessController){state.guessController.abort();state.guessController=null}
+ state.gameBusy=false;
+ win();
+ $('mysteryDesc').textContent='答案是 '+state.person.name+'！正在接通时空电话…';
+ $('guessStatus').textContent='谜底已揭晓：'+state.person.name+' · '+state.person.era;
+ setTimeout(()=>{if(state.solved&&!$('callWrap').classList.contains('show'))startCall()},1350);
+}
+function win(){state.solved=true;setStep(2);const p=state.person;$('mysteryTitle').textContent='谜底揭晓：'+p.name;$('mysteryDesc').textContent='身份推理成功！现在可以接通“历史人物模拟通话”。';$('mask').textContent='✓';$('revealName').textContent=p.name+' · '+p.era;$('revealBio').textContent=p.bio;$('revealClues').innerHTML='';p.clues.forEach(c=>{const l=document.createElement('li');l.textContent=c;$('revealClues').appendChild(l)});$('reveal').classList.add('show');$('gameInput').disabled=true;$('askBtn').disabled=true;$('revealDirectBtn').disabled=true;$('revealDirectBtn').style.display='none';}
+function legacyPortrait(p){let hat=p.female?`<path d="M112 122 Q132 44 210 54 Q288 44 309 122 L293 151 Q285 86 212 85 Q139 88 126 150Z" fill="#272d46"/><path d="M133 80 Q211 31 289 80 L296 117 Q208 89 125 117Z" fill="#35465d"/><path d="M135 89 Q209 48 285 89" fill="none" stroke="#f8c1d5" stroke-width="7"/>`:`<path d="M119 113 Q122 37 206 37 Q292 40 300 112 L283 121 Q267 76 209 76 Q151 77 137 121Z" fill="#1d2739"/><path d="M137 76 Q201 25 276 76 L270 91 Q207 67 145 91Z" fill="#26334a"/><path d="M163 52 Q210 6 250 52 L250 63 L163 63Z" fill="#1b273b" stroke="#bcd0d5" stroke-width="3"/>`;
+let beard=p.female?'':`<path d="M180 234 Q208 279 237 234 Q221 272 211 285 Q198 270 180 234Z" fill="#26303d" opacity=".86"/><path d="M179 227 Q210 240 239 227" stroke="#30373d" stroke-width="6" fill="none"/>`;
+return `<svg class="portrait" viewBox="0 0 420 465" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${p.name}的示意性卡通肖像"><defs><radialGradient id="g"><stop stop-color="${p.color}" stop-opacity=".6"/><stop offset="1" stop-color="${p.color}" stop-opacity="0"/></radialGradient><linearGradient id="robe" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${p.coat}"/><stop offset="1" stop-color="#1a3149"/></linearGradient></defs><circle class="haloRing" cx="210" cy="192" r="178" fill="url(#g)" opacity=".65"/><circle cx="210" cy="190" r="155" fill="none" stroke="${p.color}" stroke-opacity=".22" stroke-width="3"/><path d="M66 442 Q75 337 142 317 Q161 310 175 297 L245 297 Q266 314 282 318 Q346 336 354 442Z" fill="url(#robe)" stroke="#badce8" stroke-opacity=".35" stroke-width="3"/><path d="M178 291 L164 343 L210 395 L255 341 L242 291" fill="#d1d0c1"/><path d="M210 329 L210 440" stroke="#819f9d" stroke-width="4"/><path d="M162 341 L211 388 L257 341" fill="none" stroke="#c0e1e6" stroke-width="3"/><path d="M164 194 Q153 166 146 183 Q140 217 166 221 M256 194 Q270 165 278 184 Q282 213 256 223" fill="#dba985"/><ellipse cx="210" cy="179" rx="68" ry="94" fill="#dfb08a"/><ellipse cx="187" cy="185" rx="8" ry="5" fill="#213341"/><ellipse cx="232" cy="185" rx="8" ry="5" fill="#213341"/><path d="M175 169 L197 168 M221 168 L244 169" stroke="#4a3b38" stroke-width="5" stroke-linecap="round"/><path d="M207 188 L200 213 Q209 220 218 213" fill="none" stroke="#ad7b65" stroke-width="3"/><g class="mouth-rig" aria-hidden="true">
+<g class="mouth-closed"><path d="M197 236 Q209 239 221 236" fill="none" stroke="#8e4c4c" stroke-width="3.4" stroke-linecap="round"/><path d="M201 233 Q209 231 217 233" fill="none" stroke="#e0a08d" stroke-width="1.4" stroke-linecap="round" opacity=".7"/></g>
+<g class="mouth-half"><path d="M197 234 Q209 228 221 234 Q219 241 209 242 Q199 241 197 234Z" fill="#512b30" stroke="#8d5552" stroke-width="2"/><path d="M200 234 Q209 231 218 234" fill="none" stroke="#f1d6c2" stroke-width="2" stroke-linecap="round"/></g>
+<g class="mouth-open"><path d="M197 233 Q209 224 221 233 Q220 248 209 250 Q198 248 197 233Z" fill="#3c2025" stroke="#8b4d4c" stroke-width="2.2"/><path d="M200 233 Q209 230 218 233 Q214 238 204 237Z" fill="#f5dfcc"/><path d="M203 244 Q209 241 216 244" fill="none" stroke="#bb6b70" stroke-width="2.2" stroke-linecap="round"/></g>
+<g class="mouth-wide"><path d="M194 234 Q209 224 224 234 Q221 246 209 247 Q197 246 194 234Z" fill="#3b2025" stroke="#8b4d4c" stroke-width="2.2"/><path d="M198 234 Q209 230 220 234 Q216 238 202 238Z" fill="#f7e2d1"/><path d="M201 243 Q209 240 218 243" fill="none" stroke="#c77a79" stroke-width="2" stroke-linecap="round"/></g>
+<g class="mouth-round"><ellipse cx="209" cy="237" rx="5.5" ry="8.2" fill="#3d2025" stroke="#8c4d4c" stroke-width="2"/><path d="M205 233 Q209 231 213 233" fill="none" stroke="#f0d7c4" stroke-width="1.5" stroke-linecap="round"/></g>
+<g class="mouth-spread"><path d="M195 235 Q209 230 223 235 Q220 242 209 242 Q198 242 195 235Z" fill="#48252a" stroke="#8d5552" stroke-width="2"/><path d="M199 235 Q209 233 219 235" fill="none" stroke="#f2ddcc" stroke-width="2" stroke-linecap="round"/></g>
+</g>${beard}${hat}<path d="M116 440 Q116 377 158 331 M303 440 Q301 376 264 334" fill="none" stroke="${p.color}" stroke-opacity=".7" stroke-width="5"/></svg>`}
+
+function enhancedPortrait(p,instance='call'){
+ const isLi=p.id==='libai'; const id=instance+'-'+p.id;
+ const robe=isLi?'#c6d6cc':'#b99067';
+ const dark=isLi?'#173b4c':'#573d32';
+ const accent=isLi?'#acc8ce':'#bb8a58';
+ const back=isLi?'#385c67':'#634d40';
+ const name=isLi?'诗仙 · 李太白':'东坡居士 · 苏子瞻';
+ const crown=isLi?`
+  <path d="M153 160Q152 86 238 82Q320 84 328 155L317 178Q301 121 236 116Q177 118 166 180Z" fill="#202c31"/>
+  <path d="M171 113Q223 52 301 109L303 136Q239 103 174 143Z" fill="#182b33" stroke="#58747d" stroke-width="3"/>
+  <path d="M198 89Q239 47 279 87Q239 76 198 89" fill="#273b43"/>
+  <path d="M316 125Q352 138 360 195Q340 178 317 169Z" fill="#1a2b34"/>
+  <path d="M167 146Q132 163 109 231Q144 208 165 207Z" fill="#1a2b34"/>
+  <path d="M173 134Q232 111 304 131" fill="none" stroke="#b2ab93" stroke-width="4" opacity=".7"/>
+ `:`
+  <path d="M164 167Q147 115 181 77L174 57Q232 33 294 57L286 77Q325 121 308 169Z" fill="#1b2326" stroke="#b99d78" stroke-width="3"/>
+  <path d="M183 68L177 25Q235 12 296 25L290 68Z" fill="#262b2c" stroke="#b9a98d" stroke-width="2"/>
+  <path d="M194 40Q239 30 281 40" fill="none" stroke="#68635c" stroke-width="3"/>
+  <path d="M150 147Q133 125 115 139Q136 166 151 177Z" fill="#161e24"/>
+  <path d="M314 144Q332 125 352 144Q334 166 311 178Z" fill="#161e24"/>
+ `;
+ const robePattern=isLi?`
+  <path d="M87 506Q123 451 154 423M384 509Q339 453 318 423" stroke="#b3c3bf" stroke-width="7" fill="none" opacity=".8"/>
+  <path d="M161 446Q200 480 236 513Q270 482 309 447" fill="none" stroke="#587e87" stroke-width="5"/>
+  <path d="M105 493q26 -10 39 -39M345 491q-22 -10 -39 -39" stroke="#f2f3db" stroke-width="2" fill="none" opacity=".7"/>
+ `:`
+  <path d="M128 490L158 415Q233 485 310 415L345 493" fill="none" stroke="#3b4543" stroke-width="15" opacity=".9"/>
+  <path d="M160 443Q234 490 309 442" fill="none" stroke="#e2caab" stroke-width="4"/>
+  <path d="M116 490q18 -13 28 -46M361 493q-23 -25 -25 -40" fill="none" stroke="#e1b685" stroke-width="3" opacity=".6"/>
+ `;
+ const beard=isLi?`
+  <path d="M202 307Q207 337 228 354Q247 341 260 309L251 319Q236 340 219 317Z" fill="#252a29"/>
+  <path d="M202 307Q228 326 259 307" fill="none" stroke="#36312a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M200 309Q185 312 185 322M258 309Q273 307 278 322" fill="none" stroke="#302b28" stroke-width="6" stroke-linecap="round"/>
+  <path d="M225 340Q222 361 220 371" stroke="#3f3c34" stroke-width="3"/>
+ `:`
+  <path d="M189 295Q195 351 210 384Q224 404 235 419Q252 393 270 369Q279 346 286 289L271 319Q265 365 241 383Q217 361 200 316Z" fill="#2d2725"/>
+  <path d="M206 343Q225 382 240 394Q252 373 263 340" stroke="#554137" stroke-width="3" opacity=".75" fill="none"/>
+  <path d="M194 304Q175 307 166 332M286 304Q298 310 303 327" fill="none" stroke="#332b28" stroke-width="10" stroke-linecap="round"/>
+  <path d="M227 386Q231 403 237 414" stroke="#151819" stroke-width="5"/>
+ `;
+ return `<svg class="portrait refined" viewBox="0 0 475 545" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${p.name}：参考历史人物传统形象创作的动态人物插画">
+  <defs>
+    <radialGradient id="${id}-glow" cx="48%" cy="47%"><stop stop-color="${isLi?'#d5dbcc':'#e5cb9a'}" stop-opacity=".45"/><stop offset=".73" stop-color="${back}" stop-opacity=".2"/><stop offset="1" stop-color="${back}" stop-opacity="0"/></radialGradient>
+    <linearGradient id="${id}-skin" x1="0" x2=".88" y1="0" y2=".98"><stop stop-color="#f3d1ae"/><stop offset=".48" stop-color="${isLi?'#d2a47f':'#c99973'}"/><stop offset="1" stop-color="#a97059"/></linearGradient>
+    <linearGradient id="${id}-cloth" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${robe}"/><stop offset=".45" stop-color="${isLi?'#75939c':'#a07d59'}"/><stop offset="1" stop-color="${dark}"/></linearGradient>
+    <linearGradient id="${id}-face-light" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffe9c9" stop-opacity=".42"/><stop offset="1" stop-color="#694a3c" stop-opacity=".15"/></linearGradient>
+    <linearGradient id="${id}-robe-shade" x1="0" x2=".9"><stop stop-color="#fff2c8" stop-opacity=".23"/><stop offset="1" stop-color="#04212b" stop-opacity=".23"/></linearGradient>
+    <filter id="${id}-grain"><feTurbulence type="fractalNoise" baseFrequency=".42" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".06"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+  </defs>
+  <circle class="haloRing" cx="237" cy="242" r="216" fill="url(#${id}-glow)"/>
+  <circle cx="237" cy="240" r="201" fill="none" stroke="${accent}" opacity=".22" stroke-width="2"/>
+  <path d="M32 540Q35 431 132 397L190 385L285 385Q378 410 443 540Z" fill="url(#${id}-cloth)" stroke="#d6c09b" stroke-opacity=".62" stroke-width="3"/>
+  <path d="M63 530Q113 442 174 409Q209 435 237 484Q267 433 310 410Q377 442 414 530" fill="url(#${id}-robe-shade)"/>
+  <path d="M187 369L175 417L236 499L300 418L286 369" fill="${isLi?'#ebe7ce':'#efdbc1'}" stroke="#c0a37c" stroke-width="4"/>
+  <path d="M181 403Q222 438 237 476Q268 434 293 403" fill="none" stroke="${dark}" stroke-width="7"/>
+  <path d="M237 472L237 541" stroke="${accent}" stroke-width="4" opacity=".8"/>
+  ${robePattern}
+  <path d="M183 330Q168 368 188 397Q217 421 235 425Q262 418 289 394Q307 369 283 326Z" fill="#af7d64"/>
+  <path d="M178 229Q158 209 151 244Q148 272 175 283M306 227Q332 210 335 243Q340 275 305 286" fill="url(#${id}-skin)" stroke="#8f5f50" stroke-width="3"/>
+  <path d="M160 219Q159 135 233 126Q319 127 317 221Q321 291 299 329Q269 371 237 374Q204 369 181 329Q153 277 160 219Z" fill="url(#${id}-skin)" stroke="#9b6e59" stroke-width="3"/>
+  <path d="M167 218Q184 167 206 153Q274 142 307 204Q312 170 298 146Q262 120 224 128Q176 137 164 172Z" fill="url(#${id}-face-light)" opacity=".5"/>
+  <path d="M169 256Q163 291 184 310M311 259Q316 292 293 316" fill="none" stroke="#a97560" stroke-width="7" opacity=".27"/>
+  ${crown}
+  <path d="M185 233Q205 223 224 231" fill="none" stroke="#42342b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M254 231Q275 224 293 234" fill="none" stroke="#42342b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M186 247Q202 237 220 248Q203 255 186 247M254 247Q272 237 291 248Q275 256 254 247" fill="#f5efdf"/>
+  <ellipse cx="204" cy="248" rx="7" ry="6" fill="#2a2927"/><ellipse cx="275" cy="248" rx="7" ry="6" fill="#292928"/>
+  <circle cx="206" cy="246" r="2.1" fill="#f4e4c4"/><circle cx="276" cy="246" r="2.1" fill="#f4e4c4"/>
+  <g class="eye-close"><path d="M188 249Q204 244 220 249M256 249Q273 244 292 249" stroke="#513e30" stroke-width="6" fill="none" stroke-linecap="round"/></g>
+  <path d="M237 247Q232 272 226 283Q237 292 248 284" fill="none" stroke="#9e6653" stroke-width="4" stroke-linecap="round"/>
+  <path d="M191 285Q208 280 223 287M256 287Q274 281 288 285" fill="none" stroke="#403029" stroke-width="6" stroke-linecap="round"/>
+  <path class="lip-shadow" d="M219 302Q239 308 261 301" stroke="#a77865" fill="none" stroke-width="4"/>
+  <g class="mouth-opening"><path d="M215 304Q238 294 264 304Q260 319 239 322Q220 319 215 304Z" fill="#49262a" stroke="#784444" stroke-width="3"/><path d="M220 306Q239 304 259 306Q243 315 223 310Z" fill="#f1d0ad"/><path d="M230 316Q239 313 250 316" stroke="#bd7775" stroke-width="3" stroke-linecap="round"/></g>
+  <path class="mouth-line" d="M215 303Q235 310 263 303" fill="none" stroke="#6b4539" stroke-width="4.5" stroke-linecap="round"/>
+  ${beard}
+  <path d="M148 404Q121 453 106 524M335 404Q361 455 375 526" fill="none" stroke="#ecd5a5" stroke-width="2.5" opacity=".5"/>
+  <path d="M35 539L440 539" stroke="#dfbd7a" stroke-width="2" opacity=".45"/>
+  </svg>`;
+}
+function portrait(p,instance='call'){
+ if(p.id==='libai'||p.id==='sushi'){
+  const x=p.id;
+  const info=(x==='libai'?'唐代 · 诗人 · 诗仙':'北宋 · 文学家 · 东坡居士');
+  return `<div class="photoStage" data-character="${x}" aria-label="${p.name}的艺术化历史人物形象">
+    <div class="photoStack">
+      <img class="photoAvatar lipClosed" draggable="false" data-person="${x}" src="./assets/${x}-closed.webp" alt="参考历史绘画风格创作的${p.name}数字肖像">
+      <img class="photoAvatar lipHalf" draggable="false" src="./assets/${x}-half.webp" alt="" aria-hidden="true">
+      <img class="photoAvatar lipOpen" draggable="false" src="./assets/${x}-open.webp" alt="" aria-hidden="true">
+    </div>
+    <div class="photoEdge"></div><div class="photoBreath"></div>
+    <div class="portraitMiniText"><b>${p.name}</b><span>${info}</span></div>
+  </div>`;
+ }
+ return legacyPortrait(p);
+}
+function addBubble(text,me=false,thinking=false){const list=$('messages'),r=document.createElement('div');r.className='bubRow'+(me?' me':'');if(!me){const a=document.createElement('div');a.className='tinyAvatar';a.textContent='📜';r.append(a)}const b=document.createElement('div');b.className='bubble'+(thinking?' thinking':'');b.textContent=text;r.append(b);list.append(r);list.scrollTop=list.scrollHeight;return b}
+function startCall(){if(!state.solved){toast('请先完成猜谜');return}setStep(3);$('callWrap').classList.add('show');$('figure').innerHTML=portrait(state.person,'call');$('figure').dataset.viseme='closed';$('v2ArtBadge').textContent=state.person.id==='libai'?'唐 · 诗仙':state.person.id==='sushi'?'宋 · 东坡':'时空留影';$('v2ArtCaption').innerHTML=(state.person.id==='sushi'?'宋代士大夫服饰风格':'参考古代人物绘画中的服饰与气质')+'<br>AI 绘制 · 艺术化想象 · 非真实肖像';$('callName').textContent=state.person.name;$('callRole').textContent=state.person.era+' · '+state.person.type;$('messages').innerHTML='';state.chatHistory=[];state.callStarted=Date.now();if(state.timer)clearInterval(state.timer);state.timer=setInterval(()=>{const elapsed=Math.floor((Date.now()-state.callStarted)/1000);$('callTime').textContent=String(Math.floor(elapsed/60)).padStart(2,'0')+':'+String(elapsed%60).padStart(2,'0')+' · 通话中'},1000);$('callTime').textContent='00:00 · 通话中';addBubble(state.person.talk.greet);speak(state.person.talk.greet);$('chatInput').focus();checkServer()}
+function cancelSpeech(){
+ if('speechSynthesis' in window){window.speechSynthesis.cancel()}
+ stopPhotoLip();
+ clearFigureAction();
+ $('figure')?.classList.remove('speaking');$('voiceWave')?.classList.remove('active');
+}
+function speak(t){
+ const clean=String(t).replace(/【离线演示】|【实时 AI 连接失败】/g,'');
+ const cap=$('captionText');if(cap)cap.textContent=clean.slice(0,260);
+ cancelSpeech();
+ if(!state.speech||!('speechSynthesis' in window))return;
+ const u=new SpeechSynthesisUtterance(clean);
+ u.lang='zh-CN';u.rate=.93;u.pitch=.92;
+ const voices=speechSynthesis.getVoices();u.voice=voices.find(v=>v.lang.toLowerCase().startsWith('zh'))||null;
+ u.onstart=()=>{
+  $('figure').classList.add('speaking');$('voiceWave').classList.add('active');startPhotoLip(clean);setFigureAction(autoGestureForText(clean),Math.max(1800,Math.min(6500,clean.length*150)))
+ };
+ // Some browser TTS engines emit word/character boundaries; use them for a rough rhythm hint.
+ // Fallback mode uses an estimated syllable clock and short stops at punctuation.
+ u.onboundary=e=>{lipControl.boundaryIndex=Number.isFinite(e.charIndex)?e.charIndex:-1;lipControl.boundaryAt=performance.now();if(Number.isFinite(e.charIndex)){const c=clean[e.charIndex];if(c)applyMouth(visemeForChar(c))}};
+ u.onend=u.onerror=()=>{
+  stopPhotoLip();$('figure').classList.remove('speaking');$('voiceWave').classList.remove('active');clearFigureAction()
+ };
+ speechSynthesis.speak(u);
+}
+function offlineReply(q,p){const s=safeText(q);if(/贡献|成就|创造|发明|厉害|做了什么|最重要/.test(s))return p.talk.contribution;if(/时代|朝代|历史背景|社会|环境|什么时候|生活在/.test(s))return p.talk.era;if(/作品|写过|著作|代表作|诗|文章|词/.test(s))return p.talk.works;if(/学生|初中生|建议|劝告|学习|未来|怎么学|读书/.test(s))return p.talk.study;if(/你好|您好|见到你|介绍自己/.test(s))return p.talk.greet;if(/真假|可信吗|有证据|出处|史料|准确/.test(s))return `这是好问题。关于我的经历，需要把史料记载、后人传说和现代演绎分开。建议你查阅教材或博物馆、学术资料核实；这个离线演示没有联网检索史料的能力。`;if(/今天|现在|手机|电脑|互联网|人工智能|AI/.test(s))return `你们今天的世界有许多新技术，确实令人惊叹。不过我毕竟生活在${p.era}，这里是历史情景模拟，不能把我说的话当作我亲眼见过现代科技的记载。`;
+return `你问得很细。不过离线演示只内置了我在生平贡献、时代背景、代表作品及学习启发方面的有限资料。我不想凭空编造史实。你可以换一种问法，或让老师启用 AI 增强对话。`}
+function hosted(){return location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1'}
+let API_BASE=String(window.GUOHUAI_API_BASE||'').trim().replace(/\/$/,'');
+try{const saved=localStorage.getItem('guohuai_worker_url');if(saved)API_BASE=saved;}catch(_){/* 无本地存储权限则正常运行 */}
+function portraitFile(who,pose){return (window.GUOHUAI_ASSET_DATA&&window.GUOHUAI_ASSET_DATA[who+'-'+pose])||`./assets/${who}-${pose}.webp`}
+function apiUrl(path){return API_BASE?API_BASE+path:path}
+function setModeLabel(t,active){const el=$('modeLabel');el.textContent=t;el.className='mode'+(active?'':' offline')}
+function showAuth(){
+ $('apiKeyInput').value=state.apiKey;
+ $('workerUrlInput').value=API_BASE;
+ $('pinInput').value=state.pin;
+ $('authTip').textContent=state.apiKey?'已填写本次 API Key；可修改后检测连接。':'密钥只放在本页内存里，刷新后自动清除。';
+ $('authModal').classList.add('show');$('apiKeyInput').focus();
+}
+function hideAuth(){ $('authModal').classList.remove('show');$('apiKeyInput').value='';$('pinInput').value=''}
+async function checkServer(){
+ state.modeChecked=true;
+ if(!API_BASE){state.ai=false;state.onlineHosted=false;setModeLabel('离线演示 · 点击顶部填写 API 密钥',false);return;}
+ try{
+  const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),6000);
+  let r;try{r=await fetch(apiUrl('/api/status'),{signal:ctrl.signal,cache:'no-store'})}finally{clearTimeout(timer)}
+  if(!r.ok)throw Error('status unavailable');const d=await r.json();
+  state.onlineHosted=true;state.ai=!!(d.byok||d.ai);
+  if(state.ai&&state.apiKey)setModeLabel('DeepSeek · 密钥已填写（待首问验证）',true);
+  else if(state.ai)setModeLabel('DeepSeek 云端可用 · 待填写密钥',true);
+  else setModeLabel('云端可访问但未启用 AI',false);
+ }catch(e){state.ai=false;state.onlineHosted=false;setModeLabel('云端连接失败 · 仍可离线体验',false);}
+}
+async function verifyPin(){
+ const key=$('apiKeyInput').value.trim();const pin=$('pinInput').value.trim();const url=$('workerUrlInput').value.trim().replace(/\/$/,'');
+ if(url&&!/^https:\/\/[^\s/]+(?:\/.*)?$/i.test(url)){$('authTip').textContent='❌ 代理地址必须以 https:// 开头（例如 https://xxx.workers.dev）。';return}
+ if(!url){$('authTip').textContent='⚠️ 请先填写 Cloudflare Worker 地址；只贴 API Key 不能安全地从公开网页调用 DeepSeek。';return}
+ if(!key&&!pin){$('authTip').textContent='⚠️ 请粘贴 DeepSeek 密钥，或填写已部署的教师口令。';return}
+ $('pinSave').disabled=true;$('authTip').textContent='正在测试云端连接…';
+ API_BASE=url;
+ try{
+  const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),8000);
+  let r;try{r=await fetch(apiUrl('/api/status'),{signal:ctl.signal,cache:'no-store'})}finally{clearTimeout(timer)}
+  const data=await r.json().catch(()=>({}));if(!r.ok)throw Error(data.error||'代理地址没有响应正确的 /api/status');
+  if(data.pinRequired&&!pin)throw Error('当前 Worker 启用了教师口令，请填写口令');
+  if(!key&&!data.ai)throw Error('请填写 DeepSeek 密钥，或在 Worker 配置固定密钥 Secret');
+  if(pin){
+   const auth=await fetch(apiUrl('/api/auth'),{method:'POST',headers:{'Content-Type':'application/json','X-DeepSeek-Key':key},body:JSON.stringify({pin})});
+   const ar=await auth.json().catch(()=>({}));if(!auth.ok||!ar.ok)throw Error(ar.error||'口令无效');
+  }
+  state.apiKey=key;state.pin=pin;state.ai=true;state.onlineHosted=true;state.modeChecked=true;
+  try{localStorage.setItem('guohuai_worker_url',url)}catch(_){}
+  setModeLabel('DeepSeek · 已就绪（首问验证密钥）',true);
+  $('authTip').textContent='✅ 已连接云端！点击关闭，然后进入人物通话，首次提问会验证真实密钥是否可用。';
+  toast('连接就绪，API 密钥未写入任何文件');
+ }catch(e){state.ai=false;$('authTip').textContent='❌ 连接失败：'+(e.name==='AbortError'?'请求超时':(e.message||'请检查代理地址、口令及网络'))}
+ finally{$('pinSave').disabled=false}
+}
+async function sendChat(){
+ if(state.busy)return;
+ const q=safeText($('chatInput').value);if(!q){toast('请先输入问题');return}
+ if(state.apiKey&&!API_BASE){showAuth();$('authTip').textContent='请先配置 Worker URL，才能安全调用 DeepSeek。';return}
+ if(state.ai&&!state.apiKey&&!state.pin){showAuth();toast('请先填写 DeepSeek Key 或教师口令');return}
+ state.busy=true;$('chatSend').disabled=true;$('chatInput').value='';addBubble(q,true);
+ const historyBefore=state.chatHistory.slice(-10);state.chatHistory.push({role:'user',content:q});
+ const temp=addBubble('正在思考…',false,true);let response='';
+ if(state.ai&&API_BASE){
+  try{
+   const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),32000);let res;
+   try{res=await fetch(apiUrl('/api/chat'),{method:'POST',headers:{'Content-Type':'application/json',...(state.pin?{'X-Classroom-Pin':state.pin}:{}),...(state.apiKey?{'X-DeepSeek-Key':state.apiKey}:{})},body:JSON.stringify({person_id:state.person.id,message:q,history:historyBefore}),signal:ctl.signal})}finally{clearTimeout(t)}
+   const j=await res.json().catch(()=>({}));
+   if(!res.ok||!j.reply)throw Error(j.error||'AI 暂时无法连接');response=j.reply;
+  }catch(e){
+   const reason=e.name==='AbortError'?'请求超时':e.message;
+   response='【实时 AI 连接失败：'+reason+'】\n'+offlineReply(q,state.person);
+   toast('AI 连接失败，已显示离线回答；可点击顶部密钥设置查看');
+  }
+ }else{
+  await new Promise(r=>setTimeout(r,250));response='【离线演示】'+offlineReply(q,state.person)
+ }
+ temp.textContent=response;temp.classList.remove('thinking');state.chatHistory.push({role:'assistant',content:response.slice(0,1100)});
+ $('messages').scrollTop=$('messages').scrollHeight;
+ speak(response.length>550?response.slice(0,550):response);state.busy=false;$('chatSend').disabled=false
+}
+function endCall(){cancelSpeech();clearFigureAction();if(state.recognizer){try{state.recognizer.abort()}catch(_){}}state.listening=false;$('micBtn').classList.remove('off');$('micLabel').textContent='语音提问';if(state.timer)clearInterval(state.timer);$('callWrap').classList.remove('show');setStep(2)}
+function voiceInput(){const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){toast('当前浏览器不支持语音识别，请使用 Chrome/Edge 或直接打字。');return}if(state.listening&&state.recognizer){state.recognizer.stop();return}try{const rec=new R();state.recognizer=rec;rec.lang='zh-CN';rec.interimResults=false;rec.continuous=false;rec.onresult=e=>{let s=Array.from(e.results).map(r=>r[0].transcript).join('');$('chatInput').value=s;toast('已识别语音，请检查后点击发送');};rec.onerror=e=>{toast(e.error==='not-allowed'?'麦克风未获授权，请检查浏览器权限。':'语音识别失败，请使用文字输入。')};rec.onend=()=>{state.listening=false;$('micBtn').classList.remove('off');$('micLabel').textContent='语音提问'};rec.start();state.listening=true;$('micBtn').classList.add('off');$('micLabel').textContent='正在聆听';toast('请说话；识别后会填入输入框，确认后发送。')}catch(e){toast('无法启动语音识别，请使用文字输入。')}}
+$('revealDirectBtn').addEventListener('click',revealAndCall);$('askBtn').addEventListener('click',ask);$('gameInput').addEventListener('keydown',e=>{if(e.key==='Enter')ask()});document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{$('gameInput').value=b.dataset.q;ask()}));$('resetBtn').addEventListener('click',()=>{if(confirm('确认重新选定一位历史人物并清空记录吗？'))newGame()});$('joinBtn').addEventListener('click',startCall);$('endBtn').addEventListener('click',endCall);$('speakerBtn').addEventListener('click',()=>{state.speech=!state.speech;$('speakerBtn').textContent=state.speech?'🔊':'🔇';$('speakerBtn').classList.toggle('off',!state.speech);if(!state.speech)cancelSpeech();else toast('已开启语音播报')});$('micBtn').addEventListener('click',voiceInput);$('chatSend').addEventListener('click',sendChat);$('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});document.querySelectorAll('[data-chat]').forEach(b=>b.addEventListener('click',()=>{$('chatInput').value=b.dataset.chat;sendChat()}));
+$('authBtn').addEventListener('click',showAuth);$('pinClose').addEventListener('click',hideAuth);$('pinSave').addEventListener('click',verifyPin);$('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')verifyPin()});$('pinClear').addEventListener('click',()=>{state.apiKey='';state.pin='';$('apiKeyInput').value='';$('pinInput').value='';state.ai=false;setModeLabel('已清除本次密钥 · 离线演示',false);$('authTip').textContent='✅ 密钥和教师口令已从本次页面内存清除。';toast('已清除本次密钥')});$('toggleKeyBtn').addEventListener('click',()=>{const i=$('apiKeyInput');i.type=i.type==='password'?'text':'password';$('toggleKeyBtn').textContent=i.type==='password'?'显示':'隐藏'});$('teacherBtn').addEventListener('click',()=>{$('teacherModal').classList.add('show')});$('closeTeacher').addEventListener('click',()=>$('teacherModal').classList.remove('show'));$('personGrid').innerHTML='';PEOPLE.forEach(p=>{const b=document.createElement('button');b.textContent=p.name;b.addEventListener('click',()=>{newGame(p);win();startCall()});$('personGrid').appendChild(b)});window.addEventListener('beforeunload',()=>{state.apiKey='';cancelSpeech()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('authModal').classList.contains('show'))hideAuth();else if($('teacherModal').classList.contains('show'))$('teacherModal').classList.remove('show');else if($('callWrap').classList.contains('show'))endCall()}});newGame();checkServer();
+
+// Immersive classroom preview: natural lip image states, soft transitions, punctuation pauses.
+const showPortraitPreview=()=>{const li=PEOPLE.find(x=>x.id==='libai');const el=$('heroPortrait');if(el)el.innerHTML=portrait(li,'hero')};
+showPortraitPreview();
+function setFigureAction(action,duration=1800){
+ const fig=$('figure');if(!fig)return;
+ const valid=['greet','recite','think','laugh','look','nod'];
+ if(!valid.includes(action)){fig.removeAttribute('data-action');document.querySelectorAll('[data-action]').forEach(b=>b.classList.remove('active'));return}
+ if(actionTimer)clearTimeout(actionTimer);
+ fig.dataset.action=action;
+ document.querySelectorAll('#actionLab [data-action]').forEach(b=>b.classList.toggle('active',b.dataset.action===action));
+ actionTimer=setTimeout(()=>{if(fig.dataset.action===action)fig.removeAttribute('data-action');document.querySelectorAll('#actionLab [data-action]').forEach(b=>b.classList.remove('active'));actionTimer=0},duration);
+}
+function clearFigureAction(){if(actionTimer)clearTimeout(actionTimer);actionTimer=0;const fig=$('figure');if(fig)fig.removeAttribute('data-action');document.querySelectorAll('#actionLab [data-action]').forEach(b=>b.classList.remove('active'))}
+function autoGestureForText(text){
+ const t=String(text||'');
+ if(/哈哈|欢喜|高兴|开心|有趣|妙哉/.test(t))return 'laugh';
+ if(/想一想|思考|问题|为何|为什么|细想/.test(t))return 'think';
+ if(/诗|吟|举杯|酒|朗诵|诵/.test(t))return 'recite';
+ if(/山河|远方|天地|江海|天下/.test(t))return 'look';
+ return 'greet';
+}
+
+function applyMouth(pose){
+ const valid=['closed','half','open','wide','round','spread'];
+ if(!valid.includes(pose))pose='closed';
+ lipControl.pose=pose;
+ const fig=$('figure');if(!fig)return;
+ fig.dataset.viseme=pose;
+ const rig=fig.querySelector('.mouth-rig');
+ if(rig){Array.from(rig.children).forEach(g=>{g.style.opacity=g.classList.contains('mouth-'+pose)?'1':'0'});}
+ const stage=fig.querySelector('.photoStack');
+ if(stage){
+  // The photographic portraits currently have three hand-matched image states;
+  // six phonetic categories are mapped to the closest natural photographic pose.
+  stage.classList.toggle('poseHalf',['half','spread'].includes(pose));
+  stage.classList.toggle('poseOpen',['open','wide','round'].includes(pose));
+ }
+ document.querySelectorAll('[data-viseme-test]').forEach(b=>b.classList.toggle('active',b.dataset.visemeTest===pose));
+}
+function stripTone(s){return String(s||'').replace(/[āáǎà]/g,'a').replace(/[ōóǒò]/g,'o').replace(/[ēéěè]/g,'e').replace(/[īíǐì]/g,'i').replace(/[ūúǔù]/g,'u').replace(/[ǖǘǚǜ]/g,'ü');}
+function visemeForChar(ch){
+ if(!ch||/[，。！？；：、,.!?;…—\s]/.test(ch))return 'closed';
+ try{
+  if(window.pinyinPro&&typeof window.pinyinPro.pinyin==='function'){
+   const all=window.pinyinPro.pinyin(ch,{type:'all'});
+   const item=Array.isArray(all)?all[0]:null;
+   if(item&&item.isZh){
+    const initial=String(item.initial||'').toLowerCase();
+    const fin=stripTone(item.final||'').toLowerCase();
+    if(initial==='f')return 'spread';
+    if(/^(a|ai|ao|an|ang|ia|iao|ian|iang|ua|uai|uan|uang)/.test(fin))return 'wide';
+    if(/^(o|ou|ong|uo|uou|iong)/.test(fin))return 'round';
+    if(/^(u|ui|un|ue|uan|uang)/.test(fin))return 'round';
+    if(/^(i|in|ing|ie|iao|iu|ian|ü|üe|ün)/.test(fin))return 'spread';
+    if(/^(e|ei|en|eng|er)/.test(fin))return 'half';
+    return 'half';
+   }
+  }
+ }catch(_){/* CDN unavailable: use timing-only fallback below. */}
+ // Offline fallback: a restrained syllable cycle, always closing on punctuation.
+ const n=ch.codePointAt(0)||0;return ['half','wide','round','spread'][(n%4)];
+}
+function stopPhotoLip(){
+ lipControl.active=false;
+ if(lipControl.timer)clearTimeout(lipControl.timer);
+ if(lipControl.demoTimer)clearTimeout(lipControl.demoTimer);
+ if(lipControl.manualTimer)clearTimeout(lipControl.manualTimer);
+ lipControl.timer=0;lipControl.demoTimer=0;lipControl.manualTimer=0;
+ applyMouth('closed');
+}
+function lipTick(){
+ if(!lipControl.active||!$('callWrap').classList.contains('show')){stopPhotoLip();return}
+ if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){stopPhotoLip();return}
+ const now=performance.now(),elapsed=now-lipControl.started;
+ const syllableMs=lipControl.syllableMs;
+ let idx=Math.floor(elapsed/syllableMs);
+ // SpeechSynthesis boundary events usually identify a word/character start;
+ // advance through following Chinese syllables from that anchor.
+ if(lipControl.boundaryIndex>=0&&now-lipControl.boundaryAt<1250){
+  idx=lipControl.boundaryIndex+Math.floor((now-lipControl.boundaryAt)/syllableMs);
+ }
+ const char=lipControl.text[idx]||'';
+ const phase=(elapsed%syllableMs)/syllableMs;
+ let pose='closed';
+ if(char&&!/[，。！？；：、,.!?;…—\s]/.test(char)){
+  const target=visemeForChar(char);
+  if(phase<.12)pose='closed';
+  else if(phase<.27)pose='half';
+  else if(phase<.69)pose=target;
+  else if(phase<.86)pose='half';
+ }
+ applyMouth(pose);
+ lipControl.timer=setTimeout(lipTick,38);
+}
+function startPhotoLip(text){
+ stopPhotoLip();
+ if(!$('figure').querySelector('.photoStack')&&!$('figure').querySelector('.mouth-rig'))return;
+ lipControl.active=true;lipControl.started=performance.now();
+ lipControl.text=String(text||'欢迎来到时空来电，让我们一起走进历史。');
+ lipControl.boundaryIndex=-1;lipControl.boundaryAt=0;lipControl.pose='closed';
+ lipControl.syllableMs=235;
+ lipTick();
+}
+function testViseme(pose){
+ cancelSpeech();
+ applyMouth(pose);
+ if(lipControl.manualTimer)clearTimeout(lipControl.manualTimer);
+ lipControl.manualTimer=setTimeout(()=>applyMouth('closed'),760);
+}
+function demoTalking(){
+ const p=state.person;
+ if(!p||!state.solved){toast('请先猜中历史人物，或使用教师演示入口');return}
+ const t=p.id==='sushi'?'此心安处是吾乡。远方的同学，欢迎来问我问题。':'仰天大笑出门去，我辈岂是蓬蒿人。欢迎你们来问我问题！';
+ if(state.speech&&'speechSynthesis' in window){speak(t);return}
+ cancelSpeech();$('figure').classList.add('speaking');$('voiceWave').classList.add('active');
+ startPhotoLip(t);
+ lipControl.demoTimer=setTimeout(()=>{stopPhotoLip();$('figure').classList.remove('speaking');$('voiceWave').classList.remove('active');clearFigureAction()},3200);
+ toast('正在演示自然嘴型（当前未播放朗读语音）');
+}
+document.querySelectorAll('[data-viseme-test]').forEach(b=>b.addEventListener('click',()=>testViseme(b.dataset.visemeTest)));
+document.querySelectorAll('#actionLab [data-action]').forEach(b=>b.addEventListener('click',()=>setFigureAction(b.dataset.action,1900)));
+$('demoTalkBtn').addEventListener('click',demoTalking);
+$('endBtn').addEventListener('click',stopPhotoLip);
+$('fullscreenBtn').addEventListener('click',async()=>{
+ try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}
+ catch(_){toast('当前浏览器或页面不支持全屏，请尝试按 F11')}
+});
+
+</script>
+</body>
+</html>
