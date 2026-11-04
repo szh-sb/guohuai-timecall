@@ -262,6 +262,17 @@ body{background:radial-gradient(ellipse at 70% -10%,#1c5051a1 0,transparent 46%)
 <div id="teacherModal"><div class="modal"><h3>🎓 教师演示入口</h3><p>可直接选择人物演示通话，便于你课前测试。<strong>课堂正式猜谜时不要打开此面板</strong>，以免提前透露答案。</p><div id="personGrid" class="personGrid"></div><div class="helpBtns"><button class="ghost" id="closeTeacher">关闭</button></div></div></div>
 <div class="toast" id="toast" role="status"></div>
 <!-- 已移除同步外部拼音脚本；离线也可立即启动 -->
+<script>
+/* If the photo assets are not in GitHub yet, display a tasteful placeholder instead of a broken image. */
+window.addEventListener('error', function(ev) {
+  var im=ev.target;
+  if(!im || im.tagName!=='IMG' || !/\/assets\/(libai|sushi)-(closed|half|open)\.webp/.test(im.src) || im.dataset.placeholder==='yes') return;
+  im.dataset.placeholder='yes';
+  var isLi=im.src.indexOf('libai')>=0, person=isLi?'李白':'苏轼';
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="480" height="560" viewBox="0 0 480 560"><defs><linearGradient id="b" x2="1" y2="1"><stop stop-color="#081c30"/><stop offset="1" stop-color="#315263"/></linearGradient></defs><rect width="480" height="560" fill="url(#b)"/><circle cx="240" cy="195" r="135" fill="none" stroke="#e8c587" opacity=".35" stroke-width="3"/><path d="M85 560Q90 395 182 390L298 390Q390 405 395 560" fill="#243d4e" stroke="#c6a874" stroke-width="7"/><path d="M162 410Q240 490 316 410L280 375H200Z" fill="#f3e5c9"/><ellipse cx="240" cy="261" rx="91" ry="114" fill="#c99972"/><path d="M148 236Q145 138 240 132Q333 142 332 235L302 179L176 178Z" fill="#1d2228"/><path d="M166 178L164 110Q238 68 315 112L318 179Z" fill="#131b27" stroke="#be9d69" stroke-width="4"/><path d="M187 254Q207 246 224 254M256 254Q275 247 296 254" fill="none" stroke="#332a2a" stroke-width="5" stroke-linecap="round"/><path d="M239 261L233 301Q240 312 251 301" fill="none" stroke="#96674c" stroke-width="4"/><path d="M208 326Q240 338 273 325" fill="none" stroke="#7f5248" stroke-width="5"/><path d="M214 339Q240 368 266 339Q269 384 240 409Q210 381 214 339" fill="#2c2829" opacity=".8"/><text x="240" y="514" text-anchor="middle" fill="#f6dfb1" font-family="serif" font-size="42">'+person+'</text></svg>';
+  im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+}, true);
+</script>
 <script src="./config.js"></script>
 <script>
 window.addEventListener('error',e=>{const b=document.getElementById('runtimeAlert');if(b){b.hidden=false;b.textContent='网页运行异常：'+(e.message||'请检查文件是否完整解压')+'。请把这段错误发给我。'}});
